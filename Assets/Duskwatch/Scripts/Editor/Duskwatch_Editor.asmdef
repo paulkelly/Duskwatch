@@ -1,0 +1,16 @@
+{
+    "name": "Duskwatch_Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3257990bcf65fab4495d167c68c5dbc6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
