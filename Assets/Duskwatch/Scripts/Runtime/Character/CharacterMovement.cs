@@ -2,20 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterMovement : MonoBehaviour, InputSystem_Actions.IPlayerActions
+public class CharacterMovement : MonoBehaviour
 { 
     [SerializeField] private Animator _animator;
     [SerializeField] private CharacterController _characterController;
 
-    private const float MovementSpeed = 8f;
+    private const float MovementSpeed = 6f;
     private static readonly int SpeedAnimationHash = Animator.StringToHash("Speed");
-    private static readonly int AttackAnimationHash = Animator.StringToHash("Attack");
     
-    private InputSystem_Actions _input;
     private Camera _mainCamera;
     private Transform _mainCameraTransform;
 
-    private Vector2 _moveInput;
+    public Vector2 MoveInput { get; set; }
     
     private Vector3 _velocity;
     private Vector3 _accelerationVector;
@@ -26,31 +24,28 @@ public class CharacterMovement : MonoBehaviour, InputSystem_Actions.IPlayerActio
 
     private void Start()
     {
-        _input = DuskwatchInput.Actions;
-        _input.Player.Enable();
-        _input.Player.AddCallbacks(this);
-
         _mainCamera = Camera.main;
         _mainCameraTransform = _mainCamera.transform;
     }
     private void Update()
     {
-        float movementMag = _moveInput.magnitude;
+        float movementMag = MoveInput.magnitude;
         Vector3 motionVector = Vector3.zero;
 
         if (movementMag > 0.1f)
         {
-            motionVector = GetWorldInput(_moveInput, movementMag) * (MovementSpeed * Time.deltaTime);
+            motionVector = GetWorldInput(MoveInput, movementMag) * MovementSpeed;
             _targetRotation = Quaternion.LookRotation(motionVector);
         }
         
         _velocity = Vector3.SmoothDamp(_velocity, motionVector, ref _accelerationVector, 0.1f);
         _rotation = QuaternionUtil.SmoothDamp(_rotation, _targetRotation, ref _rotationVelocityVector, 0.1f);
 
-        _characterController.Move(_velocity);
+        _characterController.Move(_velocity * Time.deltaTime);
         transform.rotation = _rotation;
-        
-        _animator.SetFloat(SpeedAnimationHash, movementMag);
+
+        float speed = Mathf.Clamp01(_velocity.magnitude / MovementSpeed);
+        _animator.SetFloat(SpeedAnimationHash, speed);
     }
     
     private Vector3 GetWorldInput(Vector2 input, float magnitude)
@@ -60,17 +55,5 @@ public class CharacterMovement : MonoBehaviour, InputSystem_Actions.IPlayerActio
         worldVector = new Vector3(worldVector.x, 0, worldVector.z);
         worldVector = Vector3.ProjectOnPlane(worldVector, Vector3.up);
         return worldVector.normalized * magnitude;
-    }
-
-
-    // Input
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        _moveInput = context.action.ReadValue<Vector2>();
-    }
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if(context.action.WasPerformedThisFrame()) _animator.SetTrigger(AttackAnimationHash);
     }
 }
