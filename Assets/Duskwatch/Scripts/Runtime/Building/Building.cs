@@ -27,13 +27,13 @@ public class Building : MonoBehaviour
             module.OnBeginPlacement();
         }
 
-        _collider.enabled = false;
+        _collider.isTrigger = true;
     }
 
     public void CompletePlacement()
     {
         _isPlaced = true;
-        _collider.enabled = true;
+        _collider.isTrigger = false;
         SceneReferences.Instance.GridManager.SetBoundsBlocked(_collider.bounds, true, false);
         
         foreach (var module in _buildingPlacementListeners)

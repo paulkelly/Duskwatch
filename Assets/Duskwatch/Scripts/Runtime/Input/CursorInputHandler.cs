@@ -36,7 +36,7 @@ public class CursorInputHandler : MonoBehaviour
         }
         else
         {
-            if (DuskwatchInput.InputMode == InputMode.Default)
+            if (DuskwatchInput.InputMode != InputMode.Build)
             {
                 MouseScreenPosition = new Vector2(Screen.width / 2f, Screen.height / 2f);
             }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   name: House
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 65463b197a3b59b4b88ac8260337c40a, type: 3}
   prefab: {fileID: 3371415181722737864, guid: decacf0df37e07b47940cb682c2e2c75, type: 3}

@@ -27,7 +27,7 @@ public class BuildingPlacementConfirmation : MonoBehaviour
             
             if (_buttonShowing)
             {
-                _binder.Bind(SceneReferences.Instance.BuildSystem.ConfirmPlacementFeedback);
+                //_binder.Bind(SceneReferences.Instance.BuildSystem.ConfirmPlacementFeedback);
                 _obj.SetActive(true);
                 Tween.StopAll(_obj.transform);
                 Tween.Scale(_obj.transform, 0, 1, 0.1f);

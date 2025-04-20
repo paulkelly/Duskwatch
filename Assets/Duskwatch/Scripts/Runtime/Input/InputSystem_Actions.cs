@@ -898,6 +898,96 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SelectionWheel"",
+            ""id"": ""0a4a2a47-3924-47af-af92-f221b9e8fd32"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""9302c721-c0af-42ab-85d1-ea2c0e538097"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea172f86-eca9-4f2a-8d5b-cb8c5f8ef221"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""0cdc95e4-c655-4425-9e28-ee5ef31a4c90"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""97c0b3e1-c2ab-40c7-9dc8-2d7718138042"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d45d700-ecd9-4e5d-a730-a0fda1541f2a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""552b0ce3-2ac7-4d6b-b428-2dec979a5150"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4113852b-899b-41d8-ae6d-4e312d4d9d27"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1aca8995-0fc5-42c5-8eee-596831252560"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -989,6 +1079,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // SelectionWheel
+        m_SelectionWheel = asset.FindActionMap("SelectionWheel", throwIfNotFound: true);
+        m_SelectionWheel_Move = m_SelectionWheel.FindAction("Move", throwIfNotFound: true);
+        m_SelectionWheel_Select = m_SelectionWheel.FindAction("Select", throwIfNotFound: true);
+        m_SelectionWheel_Cancel = m_SelectionWheel.FindAction("Cancel", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -997,6 +1092,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Build.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Build.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Cursor.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Cursor.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_SelectionWheel.enabled, "This will cause a leak and performance issues, InputSystem_Actions.SelectionWheel.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1350,6 +1446,68 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // SelectionWheel
+    private readonly InputActionMap m_SelectionWheel;
+    private List<ISelectionWheelActions> m_SelectionWheelActionsCallbackInterfaces = new List<ISelectionWheelActions>();
+    private readonly InputAction m_SelectionWheel_Move;
+    private readonly InputAction m_SelectionWheel_Select;
+    private readonly InputAction m_SelectionWheel_Cancel;
+    public struct SelectionWheelActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+        public SelectionWheelActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_SelectionWheel_Move;
+        public InputAction @Select => m_Wrapper.m_SelectionWheel_Select;
+        public InputAction @Cancel => m_Wrapper.m_SelectionWheel_Cancel;
+        public InputActionMap Get() { return m_Wrapper.m_SelectionWheel; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SelectionWheelActions set) { return set.Get(); }
+        public void AddCallbacks(ISelectionWheelActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SelectionWheelActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SelectionWheelActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+        }
+
+        private void UnregisterCallbacks(ISelectionWheelActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+        }
+
+        public void RemoveCallbacks(ISelectionWheelActions instance)
+        {
+            if (m_Wrapper.m_SelectionWheelActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISelectionWheelActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SelectionWheelActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SelectionWheelActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SelectionWheelActions @SelectionWheel => new SelectionWheelActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1424,5 +1582,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnScrollWheel(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface ISelectionWheelActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using AudioSystem;
 using DataBinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,6 +8,10 @@ using UnityEngine.InputSystem;
 public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
 {
     private const float ConfirmPlacementTime = 0.5f;
+    
+    [SerializeField] private SoundData startPlacementSFX;
+    [SerializeField] private SoundData placeBuildingSFX;
+    [SerializeField] private SoundData failToPlaceBuildingSFX;
     
     [SerializeField] private Texture2D objectPlacementMap;
     
@@ -20,14 +25,8 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
     private BuildingSettings _currentBuildingSettings;
     private Building _currentPlacementBuilding;
     private float _currentConfirmationTime;
-
-    public ButtonConfirmationFeedback ConfirmPlacementFeedback { get; private set; }
+    
     public Vector3 CurrentPlacementPosition { get; private set; }
-
-    private void Awake()
-    {
-        ConfirmPlacementFeedback = new ButtonConfirmationFeedback();
-    }
 
     private void Start()
     {
@@ -45,29 +44,13 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
         {
             UpdateCurrentBuildingPosition();
         }
-        
-        // ConfirmPlacementFeedback.IsPressed.SetValue(confirmButtonPressed);
-        //
-        // if (confirmButtonPressed && _currentPlacementBuilding.ValidBuildingPosition)
-        // {
-        //     _currentConfirmationTime += Time.deltaTime;
-        //     if (_currentConfirmationTime > ConfirmPlacementTime)
-        //     {
-        //         PlaceBuilding();
-        //     }
-        // }
-        // else
-        // {
-        //     _currentConfirmationTime = 0f;
-        // }
-        //
-        // ConfirmPlacementFeedback.NormalConfirmationTime.SetValue(Mathf.Clamp01(_currentConfirmationTime / ConfirmPlacementTime));
     }
 
     public void BeginBuildingPlacement(BuildingSettings buildingSettings)
     {
         if (InPlacementMode) return;
 
+        startPlacementSFX.Play();
         _currentBuildingSettings = buildingSettings;
         StartPlacement();
     }
@@ -95,10 +78,12 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
     {
         if (!_currentPlacementBuilding.ValidBuildingPosition)
         {
+            failToPlaceBuildingSFX.Play();
             return;
         }
 
         _currentPlacementBuilding.CompletePlacement();
+        placeBuildingSFX.Play();
         
         _currentPlacementBuilding = null;
         _currentPlacement = null;
@@ -106,12 +91,13 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
         StartPlacement();
     }
 
-    private void CancelPlacement()
+    public void CancelPlacement()
     {
-        StopPlacement();
-
-        _currentPlacementBuilding = null;
         Destroy(_currentPlacement);
+        _currentBuildingSettings = null;
+        _currentPlacementBuilding = null;
+        
+        StopPlacement();
     }
 
     private void StartPlacement()

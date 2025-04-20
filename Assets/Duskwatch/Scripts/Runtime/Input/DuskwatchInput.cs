@@ -38,15 +38,33 @@ public static class DuskwatchInput
     public static InputMode InputMode => _inputMode;
     public static void SetInputMode(InputMode inputMode)
     {
+        if(_inputMode == inputMode) return;
+        
+        #if DEBUG
+        Debug.Log($"Input Mode = {inputMode}");
+        #endif
+        
         _inputMode = inputMode;
         switch (_inputMode)
         {
+            case InputMode.None:
+                _actions.Player.Disable();
+                _actions.SelectionWheel.Disable();
+                _actions.Build.Disable();
+                break;
             case InputMode.Default:
                 _actions.Player.Enable();
+                _actions.SelectionWheel.Disable();
+                _actions.Build.Disable();
+                break;
+            case InputMode.SelectionWheel:
+                _actions.Player.Disable();
+                _actions.SelectionWheel.Enable();
                 _actions.Build.Disable();
                 break;
             case InputMode.Build:
                 _actions.Player.Disable();
+                _actions.SelectionWheel.Disable();
                 _actions.Build.Enable();
                 break;
             default:
@@ -62,7 +80,9 @@ public static class DuskwatchInput
 
 public enum InputMode
 {
+    None,
     Default,
+    SelectionWheel,
     Build
 }
 

@@ -6,9 +6,6 @@ public class CharacterInputHandler : MonoBehaviour, InputSystem_Actions.IPlayerA
     [SerializeField] private CharacterMovement _characterMovement;
     [SerializeField] private InteractableManager _interactManager;
     
-    // TEMP
-    [SerializeField] private BuildingSettings _testBuild;
-    
     [SerializeField] private Animator _animator;
     private static readonly int AttackAnimationHash = Animator.StringToHash("Attack");
     
@@ -45,7 +42,7 @@ public class CharacterInputHandler : MonoBehaviour, InputSystem_Actions.IPlayerA
     {
         if (context.performed)
         {
-            SceneReferences.Instance.BuildSystem.BeginBuildingPlacement(_testBuild);
+            UIReferences.Instance.SelectionWheel.ShowBuildingSelectionWheel();
         }
     }
 }
