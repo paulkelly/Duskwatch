@@ -13,10 +13,15 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
     private const float InputStopTime = 0.2f;
     
     private const float StartAngle = 120f;
+
+    [SerializeField] private SelectionWheelColourConfig _colourConfig;
     
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private CanvasGroup _canvasGroup;
-    
+
+    [SerializeField] private Image _centerImage;
+    [SerializeField] private Image _centerImageFade;
+    [SerializeField] private SelectionWheelRequirementsPanel _requirementsPanel;
     [SerializeField] private List<SelectionWheelSegment> _segments;
     
     [SerializeField] private CanvasGroup _noInputDisplay;
@@ -122,6 +127,7 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
         if(_selection == selection) return;
 
         _selection = selection;
+        _requirementsPanel.ClearRequirements();
 
         for (int i = 0; i < _segments.Count; i++)
         {
@@ -133,6 +139,10 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
         if (_hasSelection)
         {
             _selectionText.text = _segments[selection].Option.displayText;
+            foreach (var requirement in _segments[selection].Option.GetRequirements)
+            {
+                _requirementsPanel.AddRequirement(requirement);
+            }
         }
 
         Tween.Alpha(_noInputDisplay,_selection >= 0 ? 0 : 1, TweenTimeFast);
@@ -153,8 +163,19 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
         {
             if (_selection >= 0 && _segments[_selection].HasOption)
             {
-                Hide();
-                _segments[_selection].OnSelect();
+                bool selected = _segments[_selection].OnSelect();
+                if (selected)
+                {
+                    Hide();
+                }
+                else
+                {
+                    _centerImage.color = _colourConfig.errorColour;
+                    Tween.Color(_centerImage, _colourConfig.baseColourFade, 0.3f);
+                    
+                    _centerImageFade.color = _colourConfig.errorColour;
+                    Tween.Color(_centerImageFade, _colourConfig.baseColour, 0.3f);
+                }
             }
         }
     }

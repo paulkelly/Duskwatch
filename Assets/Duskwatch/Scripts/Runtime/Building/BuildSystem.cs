@@ -82,13 +82,31 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
             return;
         }
 
+        bool hasResources = _currentBuildingSettings.HasResourceRequirements();
+        if (!hasResources)
+        {
+            failToPlaceBuildingSFX.Play();
+            CancelPlacement();
+            return;
+        }
+
+        ClaimResources(_currentBuildingSettings);
+        
         _currentPlacementBuilding.CompletePlacement();
         placeBuildingSFX.Play();
         
         _currentPlacementBuilding = null;
         _currentPlacement = null;
         
-        StartPlacement();
+        hasResources = _currentBuildingSettings.HasResourceRequirements();
+        if (hasResources)
+        {
+            StartPlacement();   
+        }
+        else
+        {
+            CancelPlacement();
+        }
     }
 
     public void CancelPlacement()
@@ -120,6 +138,14 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
         InPlacementMode = false;
         DuskwatchInput.SetInputMode(InputMode.Default);
         SceneReferences.Instance.GridManager.ShowGrid = false;
+    }
+    
+    private void ClaimResources(BuildingSettings building)
+    {
+        foreach (var resourceRequirement in building.resourceRequirements)
+        {
+            SceneReferences.Instance.ResourceManager.PayResourceCost(resourceRequirement.resourceDefinition, resourceRequirement.required);
+        }
     }
     
     

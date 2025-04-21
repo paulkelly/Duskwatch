@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: SelectionWheelColourConfig
   m_EditorClassIdentifier: 
   baseColour: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 0.69803923}
+  baseColourFade: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 1}
+  errorColour: {r: 0.5754717, g: 0.008143453, b: 0.108070664, a: 1}
   segmentDisabledColour: {r: 0.12397652, g: 0.12767078, b: 0.13207549, a: 0.2}
   segmentDefaultColour: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 0.8}
   segmentHighlightColour: {r: 0.81960785, g: 0.84705883, b: 0.8784314, a: 1}
+  segmentDisabledHighlightColour: {r: 0.81960785, g: 0.84705883, b: 0.8784314, a: 0.29803923}
   optionDefaultColour: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 1}
   optionHighlightColour: {r: 0.64705884, g: 0.69411767, b: 0.7607843, a: 1}
+  optionFadeDefaultColour: {r: 0.12397652, g: 0.12767078, b: 0.13207549, a: 1}
+  optionFadeHighlightColour: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 1}
   optionRimDefaultColour: {r: 0.46666667, g: 0.54901963, b: 0.6392157, a: 1}
   optionRimHighlightColour: {r: 0.81960785, g: 0.84705883, b: 0.8784314, a: 1}

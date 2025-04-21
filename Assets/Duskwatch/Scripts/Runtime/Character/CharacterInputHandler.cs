@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +6,7 @@ public class CharacterInputHandler : MonoBehaviour, InputSystem_Actions.IPlayerA
 {
     [SerializeField] private CharacterMovement _characterMovement;
     [SerializeField] private InteractableManager _interactManager;
+    [SerializeField] private CharacterAttack _firstAttack;
     
     [SerializeField] private Animator _animator;
     private static readonly int AttackAnimationHash = Animator.StringToHash("Attack");
@@ -17,6 +19,11 @@ public class CharacterInputHandler : MonoBehaviour, InputSystem_Actions.IPlayerA
         _input.Player.AddCallbacks(this);
     }
 
+    private void Update()
+    {
+        _interactManager.InteractHeld = _input.Player.Interact.IsPressed();
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _characterMovement.MoveInput = context.ReadValue<Vector2>();
@@ -24,17 +31,14 @@ public class CharacterInputHandler : MonoBehaviour, InputSystem_Actions.IPlayerA
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            _interactManager.Interact();
-        }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            _animator.SetTrigger(AttackAnimationHash);
+            //_animator.SetTrigger(AttackAnimationHash);
+            _firstAttack.Attack();
         }
     }
 

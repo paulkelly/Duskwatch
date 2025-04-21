@@ -14,12 +14,18 @@ public class InteractableManager : MonoBehaviour
     
     private Collider[] _sphereCastResults = new Collider[10];
     private HashSet<Collider> _toRemove = new HashSet<Collider>();
+    
+    public bool InteractHeld { get; set; }
 
-    public void Interact()
+    private void LateUpdate()
     {
         if(_closestInteractable == null) return;
         
-        _closestInteractable.Interact();
+        _closestInteractable.Interacting = InteractHeld;
+        if (InteractHeld)
+        {
+            _closestInteractable.UpdateProgress(Time.deltaTime);
+        }
     }
 
     private void Update()
@@ -28,18 +34,37 @@ public class InteractableManager : MonoBehaviour
 
         if (_interactables.Count < 1)
         {
-            _closestInteractable = null;
+            SetClosestInteractable(null);
             return;
         }
 
+        InteractableObj toSelect = null;
         Vector3 pos = transform.position;
         float best = Mathf.Infinity;
         foreach (var interactable in _interactables)
         {
             float distance = Vector3.Distance(pos, interactable.Position);
             if(distance > best) continue;
-            _closestInteractable = interactable;
+            toSelect = interactable;
             best = distance;
+        }
+
+        SetClosestInteractable(toSelect);
+    }
+
+    private void SetClosestInteractable(InteractableObj obj)
+    {
+        if(_closestInteractable == obj) return;
+
+        if (_closestInteractable != null)
+        {
+            _closestInteractable.Interacting = false;
+            _closestInteractable.IsClosest = false;
+        }
+        _closestInteractable = obj;
+        if (_closestInteractable != null)
+        {
+            _closestInteractable.IsClosest = true;
         }
     }
 

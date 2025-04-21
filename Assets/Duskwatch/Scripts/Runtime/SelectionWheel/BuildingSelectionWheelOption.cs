@@ -7,8 +7,15 @@ public class BuildingSelectionWheelOption : SelectionWheelConfigOption
 
     public override string displayText => _building.name;
     public override Sprite icon => _building.icon;
-    public override void OnSelect()
+    public override bool OnSelect()
     {
+        if (!_building.HasResourceRequirements())
+        {
+            return false;
+        }
         SceneReferences.Instance.BuildSystem.BeginBuildingPlacement(_building);
+        return true;
     }
+
+    public override ISelectionWheelRequirement[] GetRequirements => _building.resourceRequirements.ToArray();
 }

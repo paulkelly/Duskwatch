@@ -5,8 +5,10 @@ public class BuildingRenderer : MonoBehaviour, IBuildingPlacementFunctions, IBui
 {
     [SerializeField] private Renderer[] renderers;
     [SerializeField] private Material buildingPlacementMaterial;
+    [SerializeField] private Material buildingConstructionMaterial;
         
     private static readonly int Valid = Shader.PropertyToID("_Valid");
+    private static readonly int ConstructionProgress = Shader.PropertyToID("_Progress");
         
     private List<Material[]> _defaultMaterials;
         
@@ -15,14 +17,14 @@ public class BuildingRenderer : MonoBehaviour, IBuildingPlacementFunctions, IBui
         _defaultMaterials = new List<Material[]>(renderers.Length);
         foreach (var renderer in renderers)
         {
-            _defaultMaterials.Add(renderer.materials);
+            _defaultMaterials.Add(renderer.sharedMaterials);
                 
-            var swapMats = renderer.materials;
+            var swapMats = renderer.sharedMaterials;
             for(int i=0; i<swapMats.Length; i++)
             {
                 swapMats[i] = buildingPlacementMaterial;
             }
-            renderer.materials = swapMats;
+            renderer.sharedMaterials = swapMats;
         }
     }
 
@@ -31,6 +33,30 @@ public class BuildingRenderer : MonoBehaviour, IBuildingPlacementFunctions, IBui
     }
 
     public void OnFinishPlacement()
+    {
+        foreach (var renderer in renderers)
+        {
+            var swapMats = renderer.sharedMaterials;
+            for(int i=0; i<swapMats.Length; i++)
+            {
+                swapMats[i] = buildingConstructionMaterial;
+            }
+            renderer.sharedMaterials = swapMats;
+        }
+    }
+
+    public void ConstructionProgressUpdated(float progress)
+    {
+        foreach (var renderer in renderers)
+        {
+            foreach (var mat in renderer.materials)
+            {
+                mat.SetFloat(ConstructionProgress, progress);
+            }
+        }
+    }
+
+    public void OnFinishConstruction()
     {
         if (_defaultMaterials == null) return;
             

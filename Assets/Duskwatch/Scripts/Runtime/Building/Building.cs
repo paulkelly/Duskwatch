@@ -7,15 +7,44 @@ public class Building : MonoBehaviour
     [SerializeField] private Collider _collider;
 
     public Collider Collider => _collider;
+    public float ConstructionTime => _settings.constructionTime;
+    public int HousingProvided => _settings.housing;
     
     private bool _validBuildingPosition;
     private bool _isPlaced;
+    private bool _isConstructed;
     
+    public float ConstructionProgress { get; private set; }
+
+    private IBuildingActiveFunctions[] _buildingActiveListeners;
     private IBuildingPlacementFunctions[] _buildingPlacementListeners;
     private IBuildingPlacementValidFunction[] _buildingPlacementValidListeners;
+
+    public bool BuildingActive { get; private set; }
+    public void SetBuildingActive(bool active)
+    {
+        if(BuildingActive == active) return;
+        BuildingActive = active;
+
+        if (BuildingActive)
+        {
+            foreach (var module in _buildingActiveListeners)
+            {
+                module.OnBuildingActive();
+            }
+        }
+        else
+        {
+            foreach (var module in _buildingActiveListeners)
+            {
+                module.OnBuildingInactive();
+            }
+        }
+    }
     
     protected void OnEnable()
     {
+        _buildingActiveListeners = GetComponents<IBuildingActiveFunctions>();
         _buildingPlacementListeners = GetComponents<IBuildingPlacementFunctions>();
         _buildingPlacementValidListeners = GetComponents<IBuildingPlacementValidFunction>();
     }
@@ -40,7 +69,28 @@ public class Building : MonoBehaviour
         {
             module.OnFinishPlacement();
         }
+    }
+
+    public void CompleteConstruction()
+    {
+        if(!_isPlaced) CompletePlacement();
+
+        SetBuildingActive(true);
         
+        foreach (var module in _buildingPlacementListeners)
+        {
+            module.OnFinishConstruction();
+        }
+    }
+
+    public void SetConstructionProgress(float progress)
+    {
+        ConstructionProgress = Mathf.Clamp01(progress);
+        foreach (var module in _buildingPlacementListeners)
+        {
+            module.ConstructionProgressUpdated(ConstructionProgress);
+        }
+        if(progress >= 1) CompleteConstruction();
     }
     
     public bool ValidBuildingPosition

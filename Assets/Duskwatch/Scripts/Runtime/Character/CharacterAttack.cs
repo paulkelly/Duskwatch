@@ -1,0 +1,88 @@
+using System;
+using AudioSystem;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class CharacterAttack : MonoBehaviour
+{
+    [SerializeField] private LayerMask _targetLayers;
+    [SerializeField] private DamageType _damageType;
+    [SerializeField] private Vector2Int _damageRange;
+    [SerializeField] private ParticleSystem _effect;
+    [SerializeField] private SoundData _missSFX;
+    [SerializeField] private SoundData _hitSFX;
+
+    [SerializeField] private float _angle;
+    [SerializeField] private float _range;
+    [SerializeField] private float _cooldown;
+
+    private Collider[] _hits = new Collider[20];
+    private float _currentCooldown;
+    private bool _queueAttack;
+    
+    public void Attack()
+    {
+        if (_currentCooldown > 0)
+        {
+            _queueAttack = true;
+            return;
+        }
+
+        _currentCooldown = _cooldown;
+        
+        Vector3 pos = transform.position;
+        Vector3 forward = transform.forward;
+        float arcAngle = _angle / 2f;
+        int damage = Random.Range(_damageRange.x, _damageRange.y);
+        _effect.Play();
+
+        bool hit = false;
+
+        int hits = Physics.OverlapSphereNonAlloc(pos, _range, _hits, _targetLayers);
+        for (int i = 0; i < hits; i++)
+        {
+            Vector3 otherPos = _hits[i].ClosestPoint(pos);
+            Vector3 dir = otherPos - pos;
+            if (Vector3.Angle(dir, forward) > arcAngle)
+            {
+                continue;
+            }
+            
+            Health healthComponent = _hits[i].GetComponent<Health>();
+            if(healthComponent == null) continue;
+            if(!healthComponent.CanBeHit) continue;
+            hit = true;
+            healthComponent.Damage(_damageType, damage, otherPos);
+        }
+
+        if (hit)
+        {
+            _hitSFX.Play();
+        }
+        else
+        {
+            _missSFX.Play();
+        }
+    }
+
+    private void Update()
+    {
+        if (_currentCooldown > 0)
+        {
+            _currentCooldown -= Time.deltaTime;
+            return;
+        }
+
+        if (_queueAttack)
+        {
+            _queueAttack = false;
+            Attack();
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if(_range <= 0) return;
+        GizmosExtentions.DrawWireArc(transform.position, transform.forward, _angle, _range);
+    }
+}

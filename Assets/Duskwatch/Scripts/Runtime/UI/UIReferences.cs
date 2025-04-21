@@ -5,6 +5,8 @@ public class UIReferences : MonoBehaviour
     public static UIReferences Instance { get; private set; }
 
     public SelectionWheelPanel SelectionWheel;
+    public InteractableTagPanel InteractableTags;
+    public FloatingNumberPanel FloatingNumberPanel;
     
     private void Awake()
     {

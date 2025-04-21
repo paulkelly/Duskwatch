@@ -4,6 +4,8 @@ using UnityEngine;
 public class SelectionWheelColourConfig : ScriptableObject
 {
     public Color baseColour;
+    public Color baseColourFade;
+    public Color errorColour;
     
     public Color segmentDisabledColour;
     public Color segmentDefaultColour;
@@ -12,6 +14,9 @@ public class SelectionWheelColourConfig : ScriptableObject
     
     public Color optionDefaultColour;
     public Color optionHighlightColour;
+    
+    public Color optionFadeDefaultColour;
+    public Color optionFadeHighlightColour;
     
     public Color optionRimDefaultColour;
     public Color optionRimHighlightColour;

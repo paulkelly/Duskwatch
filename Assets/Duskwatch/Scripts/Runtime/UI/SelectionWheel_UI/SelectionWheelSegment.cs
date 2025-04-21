@@ -33,9 +33,9 @@ public class SelectionWheelSegment : MonoBehaviour
         UpdateColour();
     }
 
-    public void OnSelect()
+    public bool OnSelect()
     {
-        _optionUI.OnSelect();
+        return _optionUI.OnSelect();
     }
 
     private void UpdateColour()

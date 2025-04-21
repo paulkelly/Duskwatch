@@ -4,13 +4,14 @@ using UnityEngine.UI;
 
 public class SelectionWheelUIOption : MonoBehaviour
 {
-    private const float HighlightScale = 1.5f;
+    private const float HighlightScale = 1.3f;
     private const float TweenTime = 0.2f;
     
     [SerializeField] private SelectionWheelColourConfig _colours;
     
     [SerializeField] private Image _rim;
     [SerializeField] private Image _background;
+    [SerializeField] private Image _backgroundFade;
     [SerializeField] private Image _icon;
     
     [SerializeField] private RectTransform _scaleTransform;
@@ -53,11 +54,11 @@ public class SelectionWheelUIOption : MonoBehaviour
         UpdateColour();
     }
 
-    public void OnSelect()
+    public bool OnSelect()
     {
-        if (_option == null) return;
+        if (_option == null) return false;
         
-        _option.OnSelect();
+        return _option.OnSelect();
     }
     
     private void UpdateColour()
@@ -66,11 +67,13 @@ public class SelectionWheelUIOption : MonoBehaviour
         {
             _rim.color = _colours.optionRimHighlightColour;
             _background.color = _colours.optionHighlightColour;
+            _backgroundFade.color = _colours.optionFadeHighlightColour;
         }
         else
         {
             _rim.color = _colours.optionRimDefaultColour;
             _background.color = _colours.optionDefaultColour;
+            _backgroundFade.color = _colours.optionFadeDefaultColour;
         }
     }
 }

@@ -15,3 +15,8 @@ MonoBehaviour:
   name: Blacksmith
   icon: {fileID: 21300000, guid: b681445d4698dfa459cee55f11db87f2, type: 3}
   prefab: {fileID: 3371415181722737864, guid: 5d15e53fbfb83f34eb29bab3eb159996, type: 3}
+  constructionTime: 4
+  housing: 0
+  resourceRequirements:
+  - resourceDefinition: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
+    required: 300

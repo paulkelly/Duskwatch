@@ -1,15 +1,57 @@
 using System;
+using DataBinding;
 using UnityEngine;
 
+[Bindable]
 public abstract class InteractableObj : MonoBehaviour, IInteractable
 {
+    public BindableString displayString = new BindableString(string.Empty);
+    public BindableTransform displayPosition;
+    public BindableFloat normalisedProgress = new BindableFloat(0);
+    public BindableBool interacting = new BindableBool(false);
+    public BindableBool isClosest = new BindableBool(false);
+    
     public virtual float InteractTime => 2f;
-    public float HeldTime { get; set; }
+    public float Progress { get; private set; }
+    public bool Interacting
+    {
+        get => interacting.GetValue();
+        set => interacting.SetValue(value);
+    }
+    public bool IsClosest
+    {
+        get => isClosest.GetValue();
+        set => isClosest.SetValue(value);
+    }
     public Vector3 Position { get; private set; }
-    public abstract void Interact();
+    public virtual void Interact() { }
+    public virtual void OnProgressUpdated() { }
+
+    public void UpdateProgress(float time)
+    {
+        Progress += time;
+        float normalProgress = Progress / InteractTime;
+        normalisedProgress.SetValue(Mathf.Clamp01(normalProgress));
+        OnProgressUpdated();
+        if (normalProgress >= 1)
+        {
+            Interact();
+        }
+    }
 
     private void OnEnable()
     {
         Position = transform.position;
+        if (displayPosition.GetValue() == null)
+        {
+            displayPosition.SetValue(transform);
+        }
+        
+        UIReferences.Instance.InteractableTags.DisplayTag(this);
+    }
+
+    private void OnDisable()
+    {
+        UIReferences.Instance.InteractableTags.HideTag(this);
     }
 }

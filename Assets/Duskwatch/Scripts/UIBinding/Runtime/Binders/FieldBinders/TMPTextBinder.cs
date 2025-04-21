@@ -11,10 +11,22 @@ namespace DataBinding
     public class TMPTextBinding : AbstractTextBinder
     {
         [SerializeField] private TMP_Text text;
+        
+        private bool _hasModifiers;
+        private IBindingModifer<TMPTextBinding>[] _modifiers;
 
         protected override void OnValueChanged()
         {
-            text.text = GetBoundText();
+            string newValue = GetBoundText();
+            if(string.Equals(newValue, text.text)) return;
+            text.text = newValue;
+            
+            if (!_hasModifiers) return;
+            
+            for (int i = 0; i < _modifiers.Length; i++)
+            {
+                _modifiers[i].OnBindingChanged(this);
+            }
         }
         
         private void Awake()
@@ -23,6 +35,9 @@ namespace DataBinding
             {
                 text = GetComponent<TMP_Text>();
             }
+            
+            _modifiers = GetComponentsInChildren<IBindingModifer<TMPTextBinding>>();
+            _hasModifiers = _modifiers != null;
         }
 
 #if UNITY_EDITOR

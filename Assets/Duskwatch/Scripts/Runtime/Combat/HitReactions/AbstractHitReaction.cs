@@ -1,0 +1,14 @@
+using System;
+using UnityEngine;
+
+public abstract class AbstractHitReaction : MonoBehaviour, IHitReaction
+{
+    public abstract void OnHit(DamageType damageType, int damageDealt, Vector3 position);
+    private void Reset()
+    {
+        var healthComponent = GetComponent<Health>();
+        if(healthComponent == null) return;
+        
+        healthComponent.RegisterHitReaction(this);
+    }
+}

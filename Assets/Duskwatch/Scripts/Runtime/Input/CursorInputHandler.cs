@@ -5,7 +5,7 @@ public class CursorInputHandler : MonoBehaviour
 {
     private const int MaxHits = 20;
     private const float MaxDistance = 500;
-    private const float ControllerCursorSpeed = 4f;
+    private const float ControllerCursorSpeed = 2f;
     
     public Vector3 MousePosition { get; private set; }
     public Vector2 MouseScreenPosition { get; private set; }
