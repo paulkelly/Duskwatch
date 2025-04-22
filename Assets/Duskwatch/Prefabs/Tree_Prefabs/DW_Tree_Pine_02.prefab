@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6887ca9bea2a3464594496f67985a96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _immuneToDamage: 0
   _maxHealth: 80
   _hitReactions:
   - {fileID: 6953269443401409853}
@@ -169,6 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resource: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
+  _basedOnDamage: 1
+  _multiplier: 0.5
+  _gainedPerHit: 0
 --- !u!1 &3980064633428243584
 GameObject:
   m_ObjectHideFlags: 0

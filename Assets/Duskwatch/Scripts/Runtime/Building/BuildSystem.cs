@@ -124,6 +124,7 @@ public class BuildSystem : MonoBehaviour, InputSystem_Actions.IBuildActions
         
         InPlacementMode = true;
         DuskwatchInput.SetInputMode(InputMode.Build);
+        SceneReferences.Instance.cursorInputHandler.BeginControllerCursorDamping();
         SceneReferences.Instance.GridManager.ShowGrid = true;
         
         _currentPlacement = Instantiate(_currentBuildingSettings.prefab);

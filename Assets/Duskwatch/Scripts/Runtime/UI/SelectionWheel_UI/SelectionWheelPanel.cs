@@ -21,6 +21,7 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
 
     [SerializeField] private Image _centerImage;
     [SerializeField] private Image _centerImageFade;
+    [SerializeField] private RectTransform _requirementsNotMet;
     [SerializeField] private SelectionWheelRequirementsPanel _requirementsPanel;
     [SerializeField] private List<SelectionWheelSegment> _segments;
     
@@ -29,6 +30,7 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
     [SerializeField] private TMP_Text _selectionText;
     
     [SerializeField] private RectTransform _arrow;
+    [SerializeField] private RectTransform _arrowScale;
     [SerializeField] private CanvasGroup _arrowAlpha;
 
     [SerializeField] private SelectionWheelConfig _buildingSelectionWheel;
@@ -80,6 +82,8 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
     {
         Tween.Scale(_rectTransform, 0, TweenTime);
         Tween.Alpha(_canvasGroup, 0, TweenTime);
+        
+        if(DuskwatchInput.InputMode == InputMode.SelectionWheel) DuskwatchInput.SetInputMode(InputMode.Default);
     }
     
     // Unity Functions
@@ -94,6 +98,21 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
 
     private void LateUpdate()
     {
+        if (DuskwatchInput.ControllerType == ControllerType.KeyboardAndMouse)
+        {
+            Vector2 centerPos = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            Vector2 mousePos = SceneReferences.Instance.cursorInputHandler.MouseScreenPosition;
+            Vector2 dir = mousePos - centerPos;
+            float distance = Vector2.Distance(mousePos, centerPos);
+            if (distance > Screen.height/10f)
+            {
+                _moveInput = dir.normalized;
+            }
+            else
+            {
+                _moveInput = Vector2.zero;
+            }
+        }
         float inputMag = _moveInput.magnitude;
 
         bool hasInput = inputMag > 0.3f;
@@ -161,7 +180,15 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
     {
         if (context.performed)
         {
-            if (_selection >= 0 && _segments[_selection].HasOption)
+            if (_selection < 0)
+            {
+                Hide();
+                return;
+            }
+
+            Tween.PunchScale(_arrowScale, Vector3.one * 0.5f, 0.3f);
+            
+            if (_segments[_selection].HasOption)
             {
                 bool selected = _segments[_selection].OnSelect();
                 if (selected)
@@ -171,10 +198,14 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
                 else
                 {
                     _centerImage.color = _colourConfig.errorColour;
+                    Tween.StopAll(_centerImage);
                     Tween.Color(_centerImage, _colourConfig.baseColourFade, 0.3f);
                     
                     _centerImageFade.color = _colourConfig.errorColour;
+                    Tween.StopAll(_centerImageFade);
                     Tween.Color(_centerImageFade, _colourConfig.baseColour, 0.3f);
+
+                    Tween.PunchScale(_requirementsNotMet, Vector3.one * 0.5f, 0.3f);
                 }
             }
         }
@@ -185,7 +216,6 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
         if (context.performed)
         {
             Hide();
-            DuskwatchInput.SetInputMode(InputMode.Default);
         }
     }
     #endregion

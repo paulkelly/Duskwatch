@@ -19,4 +19,4 @@ MonoBehaviour:
   housing: 4
   resourceRequirements:
   - resourceDefinition: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
-    required: 100
+    required: 50

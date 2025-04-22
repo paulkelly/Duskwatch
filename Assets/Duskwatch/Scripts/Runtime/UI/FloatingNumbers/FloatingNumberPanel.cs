@@ -21,6 +21,8 @@ public class FloatingNumberPanel : MonoBehaviour
 
     public void DisplayResourceGain(Component owner, ResourceDefinition definition, int amount, Vector3 position)
     {
+        position += Vector3.up;
+        
         if (_activeFloatingNumbers.TryGetValue(owner, out var number))
         {
             number.Value += amount;

@@ -5,7 +5,9 @@ public class CursorInputHandler : MonoBehaviour
 {
     private const int MaxHits = 20;
     private const float MaxDistance = 500;
-    private const float ControllerCursorSpeed = 2f;
+    private const float ControllerCursorSpeed = 360f;
+    
+    private const float ControllerCursorDampingDuration = 1f;
     
     public Vector3 MousePosition { get; private set; }
     public Vector2 MouseScreenPosition { get; private set; }
@@ -18,6 +20,9 @@ public class CursorInputHandler : MonoBehaviour
     private readonly RaycastHit[] _hits = new RaycastHit[MaxHits];
     private int _hitCount;
 
+    private bool _dampingCursor;
+    private float _dampTime;
+
     private void Awake()
     {
         if(_mainCamera == null) _mainCamera = Camera.main;
@@ -26,6 +31,14 @@ public class CursorInputHandler : MonoBehaviour
     private void Start()
     {
         _input = DuskwatchInput.Actions;
+    }
+
+    public void BeginControllerCursorDamping()
+    {
+        if(DuskwatchInput.ControllerType != ControllerType.Gamepad) return;
+
+        _dampingCursor = true;
+        _dampTime = 0;
     }
 
     public void Update()
@@ -42,7 +55,20 @@ public class CursorInputHandler : MonoBehaviour
             }
             else
             {
-                MouseScreenPosition += _input.Cursor.Move.ReadValue<Vector2>() * ControllerCursorSpeed;
+                Vector2 controllerInput = _input.Cursor.Move.ReadValue<Vector2>();
+                controllerInput.x *= 1920f/Screen.width;
+                controllerInput.y *= 1080f/Screen.height;
+
+                if (_dampingCursor)
+                {
+                    _dampTime += Time.deltaTime;
+                    float dampValue = _dampTime / ControllerCursorDampingDuration;
+                    if (dampValue >= 1) _dampingCursor = false;
+
+                    controllerInput *= Mathf.Lerp(0.3f, 1f, Mathf.Clamp01(dampValue));
+                }
+                
+                MouseScreenPosition += controllerInput * (ControllerCursorSpeed * Time.deltaTime);
                 MouseScreenPosition = new Vector2(Mathf.Clamp(MouseScreenPosition.x, 0, Screen.width), Mathf.Clamp(MouseScreenPosition.y, 0, Screen.height));
             }
             

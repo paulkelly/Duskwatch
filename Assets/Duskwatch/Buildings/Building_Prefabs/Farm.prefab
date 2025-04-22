@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactable: {fileID: 5312166517086446165}
+  _constructionLoop: {fileID: 11400000, guid: a20974cf9dd293f459de6ea980a35ab3, type: 2}
+  _constructionComplete: {fileID: 11400000, guid: 196d28ff34ed078419e8b941adcbbb07, type: 2}
 --- !u!1 &6952627494326386393
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +219,8 @@ MonoBehaviour:
   normalisedProgress:
     _value: 0
   interacting:
+    _value: 0
+  isClosest:
     _value: 0
   _building: {fileID: 1569703446705974682}
 --- !u!135 &3015284004684847562

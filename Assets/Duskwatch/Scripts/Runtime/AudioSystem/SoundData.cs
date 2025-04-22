@@ -46,7 +46,22 @@ namespace AudioSystem
         
         public void Play()
         {
-            SoundManager.Instance.CreateSoundBuilder().Play(this);
+            SoundManager.Instance.CreateSoundBuilder().WithRandomPitch().Play(this);
+        }
+        
+        public void Play(Vector3 position)
+        {
+            SoundManager.Instance.CreateSoundBuilder().WithPosition(position).WithRandomPitch().Play(this);
+        }
+
+        public SoundEmitter PlayLooping()
+        {
+            return SoundManager.Instance.CreateSoundBuilder().PlayLooping(this);
+        }
+        
+        public SoundEmitter PlayLooping(Vector3 position)
+        {
+            return SoundManager.Instance.CreateSoundBuilder().WithPosition(position).PlayLooping(this);
         }
 
         public bool CanPlay()

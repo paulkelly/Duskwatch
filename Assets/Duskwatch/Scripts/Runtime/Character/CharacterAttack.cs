@@ -28,12 +28,20 @@ public class CharacterAttack : MonoBehaviour
             return;
         }
 
+        if (DuskwatchInput.ControllerType == ControllerType.KeyboardAndMouse)
+        {
+            transform.LookAt(SceneReferences.Instance.cursorInputHandler.MousePosition);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.identity;
+        }
+
         _currentCooldown = _cooldown;
         
         Vector3 pos = transform.position;
         Vector3 forward = transform.forward;
         float arcAngle = _angle / 2f;
-        int damage = Random.Range(_damageRange.x, _damageRange.y);
         _effect.Play();
 
         bool hit = false;
@@ -47,6 +55,8 @@ public class CharacterAttack : MonoBehaviour
             {
                 continue;
             }
+            
+            int damage = Random.Range(_damageRange.x, _damageRange.y);
             
             Health healthComponent = _hits[i].GetComponent<Health>();
             if(healthComponent == null) continue;

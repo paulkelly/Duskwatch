@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private bool _immuneToDamage;
     [SerializeField] private int _maxHealth;
     [FormerlySerializedAs("_reactions")] [SerializeField] private List<AbstractHitReaction> _hitReactions;
     [SerializeField] private List<AbstractDestroyReaction> _destroyReactions;
@@ -18,14 +19,18 @@ public class Health : MonoBehaviour
     public void Damage(DamageType damageType, int damage, Vector3 position)
     {
         if(!_alive) return;
-        damage = UpdateHealth(_currentHealth - damage);
-        
+
+        if (!_immuneToDamage)
+        {
+            damage = UpdateHealth(_currentHealth - damage);
+        }
+
         foreach (var hitReaction in _hitReactions)
         {
             hitReaction.OnHit(damageType, damage, position);
         }
 
-        if (_currentHealth <= 0)
+        if (_currentHealth <= 0 && !_immuneToDamage)
         {
             foreach (var destroyReaction in _destroyReactions)
             {
