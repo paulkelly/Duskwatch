@@ -18,6 +18,7 @@ namespace DataBinding.Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("bindingMode"));
             EditorGUILayout.Separator();
             EditorGUILayout.BeginVertical(new GUIStyle("box"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("invert"));
             switch (binder.bindingMode)
             {
                 case ActivateGameObjectBinder.BindingMode.BindingObjectType:

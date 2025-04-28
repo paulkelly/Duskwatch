@@ -44,9 +44,9 @@ public class FloatingNumber : MonoBehaviour
         _activeTweens.Clear();
         _fadeSequence.Stop();
         
-        _activeTweens.Add(Tween.PunchScale(_rectTransform, Vector3.one * PunchStrength, PunchDelay));
-        _activeTweens.Add(Tween.Custom(_targetPosition, _targetPosition + Vector3.up * HeightChange, Duration, OnValueChange, Ease.InSine));
-        _fadeSequence = Tween.Delay(FadeDelay).Chain(Tween.Alpha(_alpha, 0, Duration - FadeDelay)).OnComplete(ReturnToPool);
+        _activeTweens.Add(Tween.PunchScale(_rectTransform, Vector3.one * PunchStrength, PunchDelay, 10f, true, Ease.Default, 0f, 1, 0f, 0f, true));
+        _activeTweens.Add(Tween.Custom(_targetPosition, _targetPosition + Vector3.up * HeightChange, Duration, OnValueChange, Ease.InSine, 1, CycleMode.Restart, 0f, 0f, true));
+        _fadeSequence = Sequence.Create(1, CycleMode.Restart, Ease.Linear, true).Chain(Tween.Delay(FadeDelay)).Chain(Tween.Alpha(_alpha, 0, Duration - FadeDelay)).OnComplete(ReturnToPool);
     }
 
     private void OnValueChange(Vector3 targetPosition)

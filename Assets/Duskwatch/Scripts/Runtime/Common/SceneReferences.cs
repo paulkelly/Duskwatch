@@ -9,8 +9,12 @@ public class SceneReferences : MonoBehaviour
     public Transform RuntimeRoot;
     public GridManager GridManager;
     public BuildSystem BuildSystem;
+    public BuildingManager BuildingManager;
     public ResourceManager ResourceManager;
     [FormerlySerializedAs("MouseInputHandler")] public CursorInputHandler cursorInputHandler;
+
+    public WorkerTaskManager WorkerTaskManager;
+    public HarvestTaskManager HarvestTaskManager;
 
     private void Awake()
     {

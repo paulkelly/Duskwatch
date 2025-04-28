@@ -36,6 +36,10 @@ public static class DuskwatchInput
 
     private static InputMode _inputMode;
     public static InputMode InputMode => _inputMode;
+    
+    public delegate void InputModeChanged(InputMode mode);
+    public static event InputModeChanged OnInputModeChanged;
+    
     public static void SetInputMode(InputMode inputMode)
     {
         if(_inputMode == inputMode) return;
@@ -70,6 +74,7 @@ public static class DuskwatchInput
             default:
                 break;
         }
+        OnInputModeChanged?.Invoke(_inputMode);
     }
 
     public static void SetPaused(bool paused)

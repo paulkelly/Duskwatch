@@ -16,3 +16,15 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 29da002fd2241d549a39ad0e89cb96db, type: 3}
   nonDepleting: 0
   resourceId: ba4e61d6a6b63184aaf8350a7eb7df7d
+  backpackType: 1
+  weaponType: 4
+  damagePerHit: 0
+  collectedPerHit: 1
+  maxHeld: 3
+  maxWorkersPerResource: 5
+  minWorkers:
+    workerCount: 0
+    priority: 1000
+  maxWorkers:
+    workerCount: 5
+    priority: 100

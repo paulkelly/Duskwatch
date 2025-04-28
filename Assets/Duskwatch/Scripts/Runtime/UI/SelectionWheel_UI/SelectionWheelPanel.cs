@@ -73,15 +73,15 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
     {
         _noInputDisplay.alpha = 1;
         _selectionDisplay.alpha = 0;
-        Tween.Scale(_rectTransform, 1, TweenTime);
-        Tween.Alpha(_canvasGroup, 1, TweenTime);
+        Tween.Scale(_rectTransform, 1, TweenTime, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
+        Tween.Alpha(_canvasGroup, 1, TweenTime, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
 
         DuskwatchInput.SetInputMode(InputMode.SelectionWheel);
     }
     private void Hide()
     {
-        Tween.Scale(_rectTransform, 0, TweenTime);
-        Tween.Alpha(_canvasGroup, 0, TweenTime);
+        Tween.Scale(_rectTransform, 0, TweenTime, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
+        Tween.Alpha(_canvasGroup, 0, TweenTime, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
         
         if(DuskwatchInput.InputMode == InputMode.SelectionWheel) DuskwatchInput.SetInputMode(InputMode.Default);
     }
@@ -120,7 +120,7 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
         if (_hasInput != hasInput)
         {
             _hasInput = hasInput;
-            Tween.Alpha(_arrowAlpha, _hasInput ? 1 : 0, 0.1f);
+            Tween.Alpha(_arrowAlpha, _hasInput ? 1 : 0, 0.1f, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
         }
 
         if (_hasInput)
@@ -164,8 +164,8 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
             }
         }
 
-        Tween.Alpha(_noInputDisplay,_selection >= 0 ? 0 : 1, TweenTimeFast);
-        Tween.Alpha(_selectionDisplay,_hasSelection ? 1 : 0, TweenTimeFast);
+        Tween.Alpha(_noInputDisplay,_selection >= 0 ? 0 : 1, TweenTimeFast, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
+        Tween.Alpha(_selectionDisplay,_hasSelection ? 1 : 0, TweenTimeFast, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
     }
 
     // INPUT
@@ -186,7 +186,7 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
                 return;
             }
 
-            Tween.PunchScale(_arrowScale, Vector3.one * 0.5f, 0.3f);
+            Tween.PunchScale(_arrowScale, Vector3.one * 0.5f, 0.3f, 10f, true, Ease.Default, 0f, 1, 0f, 0f, true);
             
             if (_segments[_selection].HasOption)
             {
@@ -199,13 +199,13 @@ public class SelectionWheelPanel : MonoBehaviour, InputSystem_Actions.ISelection
                 {
                     _centerImage.color = _colourConfig.errorColour;
                     Tween.StopAll(_centerImage);
-                    Tween.Color(_centerImage, _colourConfig.baseColourFade, 0.3f);
+                    Tween.Color(_centerImage, _colourConfig.baseColourFade, 0.3f, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
                     
                     _centerImageFade.color = _colourConfig.errorColour;
                     Tween.StopAll(_centerImageFade);
-                    Tween.Color(_centerImageFade, _colourConfig.baseColour, 0.3f);
+                    Tween.Color(_centerImageFade, _colourConfig.baseColour, 0.3f, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
 
-                    Tween.PunchScale(_requirementsNotMet, Vector3.one * 0.5f, 0.3f);
+                    Tween.PunchScale(_requirementsNotMet, Vector3.one * 0.5f, 0.3f, 10f, true, Ease.Default, 0f, 1, 0f, 0f, true);
                 }
             }
         }

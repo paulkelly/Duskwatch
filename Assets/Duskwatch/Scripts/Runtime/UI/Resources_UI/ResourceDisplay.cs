@@ -28,6 +28,7 @@ public class ResourceDisplay : MonoBehaviour
 
     private void OnValueChanged()
     {
+        if(_textRectTransform == null) return;
         string newValue = GetTextValue();
         if(string.Equals(newValue, _amountText.text)) return;
 

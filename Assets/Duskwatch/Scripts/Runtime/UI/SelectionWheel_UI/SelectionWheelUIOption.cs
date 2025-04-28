@@ -34,11 +34,11 @@ public class SelectionWheelUIOption : MonoBehaviour
 
             if (_selected)
             {
-                Tween.Scale(_scaleTransform, 1, HighlightScale, TweenTime);
+                Tween.Scale(_scaleTransform, 1, HighlightScale, TweenTime, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
             }
             else
             {
-                Tween.Scale(_scaleTransform, HighlightScale, 1, TweenTime);
+                Tween.Scale(_scaleTransform, HighlightScale, 1, TweenTime, Ease.Default, 1, CycleMode.Incremental, 0f, 0f, true);
             }
             
             UpdateColour();

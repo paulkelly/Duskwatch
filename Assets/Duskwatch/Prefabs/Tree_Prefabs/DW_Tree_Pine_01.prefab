@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3098172978743417829}
   - component: {fileID: -4670669044055575168}
   - component: {fileID: 7318930508752662187}
+  - component: {fileID: 2141433128709896290}
   m_Layer: 8
   m_Name: DW_Tree_Pine_01
   m_TagString: Untagged
@@ -104,11 +105,12 @@ MonoBehaviour:
   _maxHealth: 80
   _hitReactions:
   - {fileID: 3098172978743417829}
+  - {fileID: 7318930508752662187}
   - {fileID: 3502923358626956574}
   - {fileID: 1161447726275522439}
-  - {fileID: 7318930508752662187}
   _destroyReactions:
   - {fileID: -4670669044055575168}
+  - {fileID: 2141433128709896290}
   - {fileID: 8430736733164932913}
   - {fileID: 2408861149914442583}
   - {fileID: 732211995093014900}
@@ -124,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7bf0117670835429960888f2f945df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 0
   _shakeSettings:
     strength: {x: 1, y: 0, z: 1}
     duration: 0.3
@@ -169,10 +172,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a877c22ea6c4e4caea1d7ac31c1500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 1
   _resource: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
   _basedOnDamage: 1
   _multiplier: 0.5
   _gainedPerHit: 0
+--- !u!114 &2141433128709896290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396279643126419632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8106f22111e76ee4ea115a5303704fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 7081961726264237302}
+  _resourceHealth: {fileID: 3785479267770341633}
+  _resource: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
 --- !u!1 &6309785374159743413
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +221,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 569558118761102906}
@@ -303,7 +322,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 569558118761102906}

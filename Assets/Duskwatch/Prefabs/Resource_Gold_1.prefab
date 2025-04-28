@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbbb60a18fbf06438c9e0300f26243d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 0
   _effect: {fileID: 4326259607439143391}
   _atHitPosition: 1
 --- !u!198 &4326259607439143391
@@ -5438,6 +5439,7 @@ GameObject:
   - component: {fileID: 703751567772061794}
   - component: {fileID: 2525143602843267799}
   - component: {fileID: 8569230675932165594}
+  - component: {fileID: 5366662731091301588}
   m_Layer: 8
   m_Name: Resource_Gold_1
   m_TagString: Untagged
@@ -5562,10 +5564,11 @@ MonoBehaviour:
   _hitReactions:
   - {fileID: 703751567772061794}
   - {fileID: 2525143602843267799}
+  - {fileID: 8569230675932165594}
   - {fileID: 6119824535336624182}
   - {fileID: 7657575319827989572}
-  - {fileID: 8569230675932165594}
-  _destroyReactions: []
+  _destroyReactions:
+  - {fileID: 5366662731091301588}
 --- !u!114 &703751567772061794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5578,6 +5581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a877c22ea6c4e4caea1d7ac31c1500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 1
   _resource: {fileID: 11400000, guid: ba4e61d6a6b63184aaf8350a7eb7df7d, type: 2}
   _basedOnDamage: 0
   _multiplier: 0
@@ -5594,6 +5598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7bf0117670835429960888f2f945df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 0
   _shakeSettings:
     strength: {x: 1, y: 1, z: 1}
     duration: 0.3
@@ -5626,7 +5631,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c83926a7e7edb04fafe06efc3059c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 0
   _sfx: {fileID: 11400000, guid: cf308960c82f5294781e78e2e079baef, type: 2}
+--- !u!114 &5366662731091301588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258268742532126794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8106f22111e76ee4ea115a5303704fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 2007892078934803628}
+  _resourceHealth: {fileID: 8841931408463142530}
+  _resource: {fileID: 11400000, guid: ba4e61d6a6b63184aaf8350a7eb7df7d, type: 2}
 --- !u!1 &6591974259292023239
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,6 +5694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbbb60a18fbf06438c9e0300f26243d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOnly: 0
   _effect: {fileID: 6135608397363544948}
   _atHitPosition: 0
 --- !u!198 &6135608397363544948

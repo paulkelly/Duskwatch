@@ -14,4 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Wood
   icon: {fileID: 21300000, guid: 4ffdc4593c41b02449473370277dff2f, type: 3}
+  nonDepleting: 0
   resourceId: e3092c30b8f6cfc43889f78e32eb49f1
+  backpackType: 2
+  weaponType: 2
+  damagePerHit: 2
+  collectedPerHit: 2
+  maxHeld: 6
+  maxWorkersPerResource: 2
+  minWorkers:
+    workerCount: 0
+    priority: 1000
+  maxWorkers:
+    workerCount: 10
+    priority: 100

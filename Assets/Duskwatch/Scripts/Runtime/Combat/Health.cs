@@ -8,15 +8,15 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private bool _immuneToDamage;
     [SerializeField] private int _maxHealth;
-    [FormerlySerializedAs("_reactions")] [SerializeField] private List<AbstractHitReaction> _hitReactions;
+    [SerializeField] private List<AbstractHitReaction> _hitReactions;
     [SerializeField] private List<AbstractDestroyReaction> _destroyReactions;
     
     private int _currentHealth;
     private bool _alive;
 
-    public bool CanBeHit => _alive;
+    public bool Alive => _alive;
 
-    public void Damage(DamageType damageType, int damage, Vector3 position)
+    public void Damage(DamageType damageType, int damage, bool isPlayer, Vector3 position)
     {
         if(!_alive) return;
 
@@ -27,6 +27,7 @@ public class Health : MonoBehaviour
 
         foreach (var hitReaction in _hitReactions)
         {
+            if(hitReaction.PlayerOnly && !isPlayer) continue;
             hitReaction.OnHit(damageType, damage, position);
         }
 
@@ -78,7 +79,7 @@ public class Health : MonoBehaviour
         _hitReactions.Clear();
         _destroyReactions.Clear();
         
-        _hitReactions.AddRange(GetComponentsInChildren<AbstractHitReaction>());
-        _destroyReactions.AddRange(GetComponentsInChildren<AbstractDestroyReaction>());
+        _hitReactions.AddRange(GetComponentsInChildren<AbstractHitReaction>(true));
+        _destroyReactions.AddRange(GetComponentsInChildren<AbstractDestroyReaction>(true));
     }
 }

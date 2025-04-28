@@ -6,6 +6,7 @@ public class UIReferences : MonoBehaviour
 
     public SelectionWheelPanel SelectionWheel;
     public InteractableTagPanel InteractableTags;
+    public UnitTrainingTagPool UnitTrainingTags;
     public FloatingNumberPanel FloatingNumberPanel;
     
     private void Awake()

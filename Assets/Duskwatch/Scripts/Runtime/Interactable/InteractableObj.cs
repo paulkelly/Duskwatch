@@ -16,8 +16,21 @@ public abstract class InteractableObj : MonoBehaviour, IInteractable
     public bool Interacting
     {
         get => interacting.GetValue();
-        set => interacting.SetValue(value);
+        set
+        {
+            if(interacting == value) return;
+            interacting.SetValue(value);
+            if (interacting)
+            {
+                OnInteractStart();
+            }
+            else
+            {
+                OnInteractEnd();
+            }
+        }
     }
+
     public bool IsClosest
     {
         get => isClosest.GetValue();
@@ -26,6 +39,10 @@ public abstract class InteractableObj : MonoBehaviour, IInteractable
     public Vector3 Position { get; private set; }
     public virtual void Interact() { }
     public virtual void OnProgressUpdated() { }
+
+    protected virtual void OnInteractStart() { }
+
+    protected virtual void OnInteractEnd() { }
 
     public void UpdateProgress(float time)
     {

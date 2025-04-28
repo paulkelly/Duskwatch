@@ -15,6 +15,7 @@ namespace DataBinding
         }
         
         public BindingMode bindingMode;
+        public bool invert;
         
         //BindingObjectType
         public BindingType bindingType;
@@ -63,7 +64,9 @@ namespace DataBinding
 
         private void OnBindingValueChanged()
         {
-            gameObject.SetActive(bindableVariable.GetValue());
+            bool value = bindableVariable.GetValue();
+            if (invert) value = !value;
+            gameObject.SetActive(value);
         }
 
         public override void Unbind()

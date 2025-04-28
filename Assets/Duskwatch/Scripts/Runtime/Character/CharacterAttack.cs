@@ -60,9 +60,9 @@ public class CharacterAttack : MonoBehaviour
             
             Health healthComponent = _hits[i].GetComponent<Health>();
             if(healthComponent == null) continue;
-            if(!healthComponent.CanBeHit) continue;
+            if(!healthComponent.Alive) continue;
             hit = true;
-            healthComponent.Damage(_damageType, damage, otherPos);
+            healthComponent.Damage(_damageType, damage, true, otherPos);
         }
 
         if (hit)
