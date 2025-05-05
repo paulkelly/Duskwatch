@@ -103,11 +103,3 @@ public class HarvestResourceTask : AbstractDestroyReaction, IAgentTask
         enabled = true;
     }
 }
-
-[Serializable]
-public struct WorkerPriority
-{
-    public int workerCount;
-    public float priority;
-
-}

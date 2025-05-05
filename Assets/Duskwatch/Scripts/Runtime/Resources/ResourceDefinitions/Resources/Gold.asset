@@ -27,4 +27,4 @@ MonoBehaviour:
     priority: 1000
   maxWorkers:
     workerCount: 5
-    priority: 100
+    priority: 500

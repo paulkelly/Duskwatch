@@ -19,6 +19,7 @@ public abstract class AbstractStatusTag : MonoBehaviour
     }
     protected void HideTween()
     {
+        if(transform == null) return;
         Tween.Scale(transform, 0, TweenTime).OnComplete(ReturnToPool);
     }
 }

@@ -24,7 +24,7 @@ MonoBehaviour:
   maxWorkersPerResource: 2
   minWorkers:
     workerCount: 0
-    priority: 1000
+    priority: 800
   maxWorkers:
-    workerCount: 10
-    priority: 100
+    workerCount: 15
+    priority: 50

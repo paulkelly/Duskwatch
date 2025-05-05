@@ -10,6 +10,8 @@ public class BuildingConstructionInteractable : InteractableObj
 
     public static event BeginBuilding OnBeginBuilding;
     public static event StopBuilding OnStopBuilding;
+    
+    public override Vector3 GetClosestPosition(Vector3 fromPosition) => _building.Collider.ClosestPoint(fromPosition);
 
     public override void OnProgressUpdated()
     {

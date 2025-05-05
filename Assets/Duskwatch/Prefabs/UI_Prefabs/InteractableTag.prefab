@@ -228,7 +228,7 @@ MonoBehaviour:
     bindingType:
       assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-    property: isClosest
+    property: showProgress
   _falseValue: 0.7
   _trueValue: 1
   _tweenTime: 0.2

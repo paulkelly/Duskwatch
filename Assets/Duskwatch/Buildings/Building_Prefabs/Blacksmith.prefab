@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 1543817260234533331}
   - component: {fileID: 4600874168997065556}
   - component: {fileID: 6028062522522020539}
+  - component: {fileID: 9177788342232131974}
   m_Layer: 6
   m_Name: ConstructionInteractable
   m_TagString: Untagged
@@ -219,7 +220,7 @@ MonoBehaviour:
     _value: 0
   interacting:
     _value: 0
-  isClosest:
+  showProgress:
     _value: 0
   _building: {fileID: 1569703446705974682}
 --- !u!135 &6028062522522020539
@@ -243,6 +244,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9177788342232131974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750906989038254129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05196047832ff8745942bb08e4a0c7d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactWith: {fileID: 4600874168997065556}
+  maxWorkers: 2
+  priorityOverTime: 500
+  minWorkerPriority:
+    workerCount: 1
+    priority: 5000
+  maxWorkerPriority:
+    workerCount: 2
+    priority: 1000
 --- !u!1 &7591560078651416647
 GameObject:
   m_ObjectHideFlags: 0

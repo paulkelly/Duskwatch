@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Town Hall
   icon: {fileID: 0}
   prefab: {fileID: 3580235139716933480, guid: 471a7487bf0239d4c80dcb7d9be5d51d, type: 3}
-  constructionTime: 4
+  constructionTime: 24
   housing: 2
   resourceRequirements: []

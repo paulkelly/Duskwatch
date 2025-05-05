@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Farm
   icon: {fileID: 21300000, guid: 80c22f54233ea0b45a818a282fd30bc5, type: 3}
   prefab: {fileID: 3371415181722737864, guid: c8df01b0a9ac3e34a8a8dad7857dde85, type: 3}
-  constructionTime: 4
+  constructionTime: 12
   housing: 0
   resourceRequirements:
   - resourceDefinition: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
