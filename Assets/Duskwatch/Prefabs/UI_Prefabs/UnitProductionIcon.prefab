@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 1066682379850718130}
   - component: {fileID: 3300753346517103437}
   - component: {fileID: 6094780057026094336}
-  - component: {fileID: 4879619523191580730}
-  - component: {fileID: 2458399800335603761}
   m_Layer: 0
   m_Name: icon
   m_TagString: Untagged
@@ -77,47 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4879619523191580730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524444621795245837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2569208a4a35d2746b6a1661e7403d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphic: {fileID: 6094780057026094336}
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: InProgressIcon
---- !u!114 &2458399800335603761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524444621795245837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f822f32d17f6444bfdbf88c649d54e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bindingMode: 1
-  invert: 0
-  bindingType:
-    assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: InProgress
-  bindingFunction: {fileID: 0}
 --- !u!1 &1005612184516857001
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,8 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6698194195263101016}
   - component: {fileID: 5164905471459036529}
-  - component: {fileID: 4573743105322750960}
-  - component: {fileID: 1104424370213983068}
+  - component: {fileID: 3297768596769383907}
   m_Layer: 0
   m_Name: UnitProductionIcon
   m_TagString: Untagged
@@ -420,8 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895585592fb40d84c91684017953529a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _binder: {fileID: 4573743105322750960}
---- !u!114 &4573743105322750960
+  _binder: {fileID: 3297768596769383907}
+--- !u!114 &3297768596769383907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,35 +386,86 @@ MonoBehaviour:
   m_GameObject: {fileID: 2082523080359618427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6f655254978514f9b67f71a3955d1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0afcd6f0b9a53b149b209ea3fc111e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bindingType:
+    assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   binders:
-  - {fileID: 1104424370213983068}
-  - {fileID: 4238985418614113603}
-  - {fileID: 4879619523191580730}
-  - {fileID: 2458399800335603761}
-  - {fileID: 4256758388370041889}
-  - {fileID: 4550778157205684307}
-  - {fileID: 2032663047533498877}
-  - {fileID: 3484408646084278038}
---- !u!114 &1104424370213983068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082523080359618427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3abdf3aac021747a2e271a4cd2445a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: Position
+  - rid: 5129394975571181798
+  - rid: 5129394975571181799
+  - rid: 5129394975571181800
+  - rid: 5129394975571181801
+  - rid: 5129394975571181802
+  - rid: 5129394975571181804
+  - rid: 5129394975571181805
+  - rid: 5129394975571181807
+  references:
+    version: 2
+    RefIds:
+    - rid: 5129394975571181798
+      type: {class: ColourBoolBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 5167058185339809748}
+        bindingField:
+          property: InProgress
+        trueColour: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 1}
+        falseColour: {r: 0.92156863, g: 0.23137255, b: 0.3529412, a: 1}
+        smoothValue: 0
+        smoothTime: 0
+    - rid: 5129394975571181799
+      type: {class: ImageFillBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 5831424195657968838}
+        bindingField:
+          property: Progress
+        maxValue: 1
+        smoothValue: 0
+        smoothTime: 0
+    - rid: 5129394975571181800
+      type: {class: ImageSpriteBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 6094780057026094336}
+        bindingField:
+          property: InProgressIcon
+    - rid: 5129394975571181801
+      type: {class: GameObjectBoolBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 5369176498393333099}
+        bindingField:
+          property: InProgress
+        invert: 1
+        disableDelay: 0
+    - rid: 5129394975571181802
+      type: {class: TransformPositionBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 6698194195263101016}
+        canvas: {fileID: 0}
+        bindingField:
+          property: Position
+    - rid: 5129394975571181804
+      type: {class: ImageSpriteBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 1264371243218705926}
+        bindingField:
+          property: MissingRequirementIcon
+    - rid: 5129394975571181805
+      type: {class: GameObjectBoolBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 524444621795245837}
+        bindingField:
+          property: InProgress
+        invert: 0
+        disableDelay: 0
+    - rid: 5129394975571181807
+      type: {class: GameObjectBoolBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 2454075609930655808}
+        bindingField:
+          property: InProgress
+        invert: 1
+        disableDelay: 0
 --- !u!1 &2337722602173985959
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,8 +515,6 @@ GameObject:
   - component: {fileID: 1792791272574153108}
   - component: {fileID: 4173812285884148924}
   - component: {fileID: 1264371243218705926}
-  - component: {fileID: 4256758388370041889}
-  - component: {fileID: 4550778157205684307}
   m_Layer: 0
   m_Name: notenough
   m_TagString: Untagged
@@ -574,47 +579,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4256758388370041889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2454075609930655808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2569208a4a35d2746b6a1661e7403d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphic: {fileID: 1264371243218705926}
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: MissingRequirementIcon
---- !u!114 &4550778157205684307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2454075609930655808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f822f32d17f6444bfdbf88c649d54e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bindingMode: 1
-  invert: 1
-  bindingType:
-    assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: InProgress
-  bindingFunction: {fileID: 0}
 --- !u!1 &4809332970325934209
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +590,6 @@ GameObject:
   - component: {fileID: 7611181355079913842}
   - component: {fileID: 7919145142574821305}
   - component: {fileID: 5831424195657968838}
-  - component: {fileID: 4238985418614113603}
   m_Layer: 0
   m_Name: fill
   m_TagString: Untagged
@@ -691,26 +654,6 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4238985418614113603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4809332970325934209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e8a05535489e541893b08f98769acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 5831424195657968838}
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: Progress
-  smoothValue: 0
-  smoothTime: 0
 --- !u!1 &5124680837798235487
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +740,6 @@ GameObject:
   - component: {fileID: 232432760027422844}
   - component: {fileID: 5504816696666395164}
   - component: {fileID: 7144592073892230779}
-  - component: {fileID: 3484408646084278038}
   m_Layer: 0
   m_Name: cross
   m_TagString: Untagged
@@ -863,27 +805,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3484408646084278038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369176498393333099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b981a82adeb8fc448e93fc2b8fbe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rectTransform: {fileID: 232432760027422844}
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: InProgress
-  _falseValue: 1
-  _trueValue: 0
-  _tweenTime: 0.2
 --- !u!1 &5752166116632027195
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +907,6 @@ GameObject:
   - component: {fileID: 2005041833717818266}
   - component: {fileID: 6336702994172632587}
   - component: {fileID: 5167058185339809748}
-  - component: {fileID: 2032663047533498877}
   m_Layer: 0
   m_Name: fillbg
   m_TagString: Untagged
@@ -1051,27 +971,6 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2032663047533498877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7498951972912922673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bc12c5d5b32ff499e7d9976f4c1411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphic: {fileID: 5167058185339809748}
-  target:
-    bindingType:
-      assemblyQualifiedName: UnitTraining, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: InProgress
-  _falseValue: {r: 0.92156863, g: 0.23137255, b: 0.3529412, a: 1}
-  _trueValue: {r: 0.29411766, g: 0.39607844, b: 0.5176471, a: 1}
-  _tweenTime: 0.2
 --- !u!1 &8285212856382307328
 GameObject:
   m_ObjectHideFlags: 0

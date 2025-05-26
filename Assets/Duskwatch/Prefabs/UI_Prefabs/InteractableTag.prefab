@@ -48,7 +48,6 @@ GameObject:
   - component: {fileID: 7736625521242254566}
   - component: {fileID: 1320140720356114756}
   - component: {fileID: 4143540076510899957}
-  - component: {fileID: 536464182679520799}
   m_Layer: 0
   m_Name: fill
   m_TagString: Untagged
@@ -113,26 +112,6 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &536464182679520799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709853618636885916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e8a05535489e541893b08f98769acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 4143540076510899957}
-  target:
-    bindingType:
-      assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: normalisedProgress
-  smoothValue: 0
-  smoothTime: 0
 --- !u!1 &2400407779831064141
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +123,6 @@ GameObject:
   - component: {fileID: 6402234553966529495}
   - component: {fileID: 6613610771839045262}
   - component: {fileID: 8075366093157465547}
-  - component: {fileID: 4069678220142265524}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -211,27 +189,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4069678220142265524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2400407779831064141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b981a82adeb8fc448e93fc2b8fbe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rectTransform: {fileID: 6402234553966529495}
-  target:
-    bindingType:
-      assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: showProgress
-  _falseValue: 0.7
-  _trueValue: 1
-  _tweenTime: 0.2
 --- !u!1 &3219035107404659141
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +275,6 @@ GameObject:
   - component: {fileID: 8480909073068769233}
   - component: {fileID: 3126095036470801175}
   - component: {fileID: 1318618847097508213}
-  - component: {fileID: 6651464395936584629}
   m_Layer: 0
   m_Name: text
   m_TagString: Untagged
@@ -444,25 +400,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6651464395936584629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3466477160323468247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 793a6f6d7dcd4eb4e9c02b474ed204fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target:
-    bindingType:
-      assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: displayString
-  stringFormat: 
-  text: {fileID: 1318618847097508213}
 --- !u!1 &4390555431744330781
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +411,6 @@ GameObject:
   - component: {fileID: 5828458773434059501}
   - component: {fileID: 8448047021402422287}
   - component: {fileID: 6492765692346141427}
-  - component: {fileID: 2373738128634948309}
   m_Layer: 0
   m_Name: icon
   m_TagString: Untagged
@@ -539,26 +475,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2373738128634948309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4390555431744330781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d18ca73b47d11854a90de1e540961df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphic: {fileID: 6492765692346141427}
-  target:
-    bindingType:
-      assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: interacting
-  _falseValue: {fileID: 21300000, guid: 093529d73e9c9d9419923f1e6ce21a9b, type: 3}
-  _trueValue: {fileID: 21300000, guid: d25f1cace375d2949b4518d51a18efbe, type: 3}
 --- !u!1 &5519041487965568220
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,8 +560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5142394606526470128}
   - component: {fileID: 576703444025027608}
-  - component: {fileID: 759153445032507963}
-  - component: {fileID: 8402351404910829153}
+  - component: {fileID: 1566814659791892313}
   m_Layer: 0
   m_Name: InteractableTag
   m_TagString: Untagged
@@ -686,8 +601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f84d4779f34b641a87e7d1e774fcd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _binder: {fileID: 759153445032507963}
---- !u!114 &759153445032507963
+  _binder: {fileID: 1566814659791892313}
+--- !u!114 &1566814659791892313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,33 +611,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 6457997178280451669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6f655254978514f9b67f71a3955d1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0afcd6f0b9a53b149b209ea3fc111e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bindingType:
+    assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   binders:
-  - {fileID: 8402351404910829153}
-  - {fileID: 6651464395936584629}
-  - {fileID: 2373738128634948309}
-  - {fileID: 536464182679520799}
-  - {fileID: 7414830828057542617}
-  - {fileID: 4069678220142265524}
---- !u!114 &8402351404910829153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6457997178280451669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3abdf3aac021747a2e271a4cd2445a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target:
-    bindingType:
-      assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: displayPosition
+  - rid: 5129394975571181794
+  - rid: 5129394975571181795
+  - rid: 5129394975571181796
+  - rid: 5129394975571181797
+  - rid: 5129394975571181803
+  references:
+    version: 2
+    RefIds:
+    - rid: 5129394975571181794
+      type: {class: TMPSimpleTextBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        bindingField:
+          property: displayString
+        target: {fileID: 1318618847097508213}
+    - rid: 5129394975571181795
+      type: {class: ScaleBoolBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 6402234553966529495}
+        bindingField:
+          property: showProgress
+        falseScale: {x: 0.7, y: 0.7, z: 0.7}
+        trueScale: {x: 1, y: 1, z: 1}
+        scaleTime: 0.2
+    - rid: 5129394975571181796
+      type: {class: ImageFillBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 4143540076510899957}
+        bindingField:
+          property: normalisedProgress
+        maxValue: 1
+        smoothValue: 0
+        smoothTime: 0
+    - rid: 5129394975571181797
+      type: {class: ImageSpriteBoolBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 6492765692346141427}
+        bindingField:
+          property: interacting
+        trueSprite: {fileID: 21300000, guid: d25f1cace375d2949b4518d51a18efbe, type: 3}
+        falseSprite: {fileID: 21300000, guid: 093529d73e9c9d9419923f1e6ce21a9b, type: 3}
+    - rid: 5129394975571181803
+      type: {class: TransformPositionBinder, ns: DataBinding, asm: DataBinding}
+      data:
+        target: {fileID: 5142394606526470128}
+        canvas: {fileID: 0}
+        bindingField:
+          property: displayPosition
 --- !u!1 &6530206329196696471
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +749,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4373442046274835078}
-  - component: {fileID: 7414830828057542617}
   m_Layer: 0
   m_Name: icon
   m_TagString: Untagged
@@ -837,24 +778,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -38.6}
   m_SizeDelta: {x: 62, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7414830828057542617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8946423120658139364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b981a82adeb8fc448e93fc2b8fbe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rectTransform: {fileID: 4373442046274835078}
-  target:
-    bindingType:
-      assemblyQualifiedName: InteractableObj, Duskwatch, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    property: isClosest
-  _falseValue: 0.7
-  _trueValue: 1
-  _tweenTime: 0.2

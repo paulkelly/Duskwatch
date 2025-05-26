@@ -19,18 +19,30 @@ public class UnitTraining : MonoBehaviour, IBuildingActiveFunctions
     private bool _isActive;
     [SerializeField] private float _spawnTime;
 
+    private bool _tagRegistered;
+
     private void OnEnable()
     {
         //TODO: Use requirements
         MissingRequirementIcon.SetValue(_housing.icon);
+        
+        if(!UIReferences.Instance) return;
+        
         UIReferences.Instance.UnitTrainingTags.DisplayTag(this);
+        _tagRegistered = true;
     }
     private void OnDisable()
     {
         UIReferences.Instance.UnitTrainingTags.HideTag(this);
     }
-    
-    
+
+    private void Start()
+    {
+        if(_tagRegistered) return;
+        UIReferences.Instance.UnitTrainingTags.DisplayTag(this);
+        _tagRegistered = true;
+    }
+
     public void OnBuildingActive()
     {
         _isActive = true;

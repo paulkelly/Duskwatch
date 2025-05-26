@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UnitTrainingStatusTag : AbstractStatusTag
 {
-    [SerializeField] private AbstractBinder _binder;
+    [SerializeField] private UIBinding _binder;
     
     public override void Bind(object obj)
     {

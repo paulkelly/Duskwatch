@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractableStatusTag : MonoBehaviour
 {
     private const float TweenTime = 0.2f;
-    [SerializeField] private AbstractBinder _binder;
+    [SerializeField] private UIBinding _binder;
     private InteractableObj _interactable;
 
     public void Display(InteractableObj obj)

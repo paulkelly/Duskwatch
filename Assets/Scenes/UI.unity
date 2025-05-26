@@ -3939,7 +3939,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasTransform: {fileID: 768838398}
-  _binder: {fileID: 376552929}
   _obj: {fileID: 376552927}
   _rectTransform: {fileID: 376552928}
 --- !u!1 &789576877

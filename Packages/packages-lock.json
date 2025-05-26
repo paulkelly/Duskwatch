@@ -29,6 +29,15 @@
       "source": "local-tarball",
       "dependencies": {}
     },
+    "com.paulkelly.uibinding": {
+      "version": "https://github.com/PKelly429/UIBinding.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.kyrylokuzyk.primetween": "1.3.2"
+      },
+      "hash": "c51f18779c689f08eb492f70e782b29ab01979d6"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
