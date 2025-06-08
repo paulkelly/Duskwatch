@@ -1,85 +1,95 @@
 using System;
 using System.Collections.Generic;
+using DataBinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[Bindable]
 public class Health : MonoBehaviour
 {
-    [SerializeField] private bool _immuneToDamage;
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private List<AbstractHitReaction> _hitReactions;
-    [SerializeField] private List<AbstractDestroyReaction> _destroyReactions;
-    
-    private int _currentHealth;
-    private bool _alive;
+    public BindableInt maxHealth;
+    [NonSerialized] public BindableInt currentHealth = new BindableInt(0);
+    [NonSerialized] public BindableBool alive = new BindableBool(true);
 
-    public bool Alive => _alive;
+    [SerializeField] private bool _immuneToDamage;
+    [SerializeField] private List<IHitReaction> _hitReactions;
+    [SerializeField] private List<IDestroyReaction> _destroyReactions;
+
+    public void Resurrect()
+    {
+        Resurrect(maxHealth);
+    }
+
+    public void Resurrect(int health)
+    {
+        if (health <= 0) return;
+
+        UpdateHealth(health);
+        alive.SetValue(true);
+        foreach (var destroyReaction in _destroyReactions)
+        {
+            destroyReaction.OnResurrect();
+        }
+    }
 
     public void Damage(DamageType damageType, int damage, bool isPlayer, Vector3 position)
     {
-        if(!_alive) return;
+        if (!alive) return;
 
         if (!_immuneToDamage)
         {
-            damage = UpdateHealth(_currentHealth - damage);
+            damage = UpdateHealth(currentHealth - damage);
         }
 
         foreach (var hitReaction in _hitReactions)
         {
-            if(hitReaction.PlayerOnly && !isPlayer) continue;
+            if (hitReaction.PlayerOnly && !isPlayer) continue;
             hitReaction.OnHit(damageType, damage, position);
         }
 
-        if (_currentHealth <= 0 && !_immuneToDamage)
+        if (currentHealth <= 0 && !_immuneToDamage)
         {
             foreach (var destroyReaction in _destroyReactions)
             {
                 destroyReaction.OnDestroyed();
             }
 
-            _alive = false;
+            alive.SetValue(false);
         }
+    }
+
+    public void Heal(int health)
+    {
+        if (!alive) return;
+
+        UpdateHealth(currentHealth + health);
     }
 
     private int UpdateHealth(int newValue)
     {
-        int oldValue = _currentHealth;
-        _currentHealth = Mathf.Clamp(newValue, 0, _maxHealth);
-        return oldValue - _currentHealth;
+        int oldValue = currentHealth;
+        currentHealth.SetValue(Mathf.Clamp(newValue, 0, maxHealth));
+        return oldValue - currentHealth;
     }
 
     private void OnEnable()
     {
-        _currentHealth = _maxHealth;
-        _alive = true;
-    }
-
-    private void Reset()
-    {
         FindReactions();
+        
+        currentHealth.SetValue(maxHealth);
+        alive.SetValue(true);
     }
     
-    public void RegisterHitReaction(AbstractHitReaction hitReaction)
-    {
-        _hitReactions.Add(hitReaction);
-    }
-    
-    public void RegisterDestroyReaction(AbstractDestroyReaction hitReaction)
-    {
-        _destroyReactions.Add(hitReaction);
-    }
-
-    [Button]
     private void FindReactions()
     {
-        if(_hitReactions == null) _hitReactions = new List<AbstractHitReaction>();
-        if(_destroyReactions == null) _destroyReactions = new List<AbstractDestroyReaction>();
+        if (_hitReactions == null) _hitReactions = new List<IHitReaction>();
+        if (_destroyReactions == null) _destroyReactions = new List<IDestroyReaction>();
 
         _hitReactions.Clear();
         _destroyReactions.Clear();
-        
-        _hitReactions.AddRange(GetComponentsInChildren<AbstractHitReaction>(true));
-        _destroyReactions.AddRange(GetComponentsInChildren<AbstractDestroyReaction>(true));
+
+        _hitReactions.AddRange(GetComponentsInChildren<IHitReaction>(true));
+        _destroyReactions.AddRange(GetComponentsInChildren<IDestroyReaction>(true));
     }
 }

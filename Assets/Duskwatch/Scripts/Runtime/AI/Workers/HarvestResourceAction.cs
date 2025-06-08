@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class HarvestResourceAction : IAgentAction
 {
-    private DuskwatchAgent _worker;
+    private WorkerAgent _worker;
     private Health _resourceHealth;
     private Transform _resourceTransform;
     private ResourceDefinition _resource;
     
     
-    public HarvestResourceAction(DuskwatchAgent worker, Health resourceHealth, ResourceDefinition resource)
+    public HarvestResourceAction(WorkerAgent worker, Health resourceHealth, ResourceDefinition resource)
     {
         _worker = worker;
         _resourceHealth = resourceHealth;
@@ -16,7 +16,7 @@ public class HarvestResourceAction : IAgentAction
         _resource = resource;
     }
 
-    public bool Complete => (_worker.HasResource && _worker.HoldingMaxAmount) || !_resourceHealth.Alive;
+    public bool Complete => (_worker.HasResource && _worker.HoldingMaxAmount) || !_resourceHealth.alive;
     public void Start()
     {
         _worker.Harvesting = true;
@@ -40,7 +40,7 @@ public class HarvestResourceAction : IAgentAction
 
     public void OnAgentHit()
     {
-        if (_resourceHealth.Alive)
+        if (_resourceHealth.alive)
         {
             _resourceHealth.Damage(DamageType.Melee, _resource.damagePerHit, false, _worker.Position);
             _worker.HarvestResource(_resource);

@@ -9,6 +9,7 @@ public class ResourcePanel : MonoBehaviour
     {
         foreach (var resource in SceneReferences.Instance.ResourceManager.GetAllResources())
         {
+            if (resource.hidden) continue;
             var obj = Instantiate(_resourcePrefab, _parent);
             var display = obj.GetComponent<ResourceDisplay>();
             if (display == null)

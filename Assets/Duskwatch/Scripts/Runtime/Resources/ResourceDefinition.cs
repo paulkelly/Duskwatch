@@ -8,6 +8,7 @@ public class ResourceDefinition : ScriptableObject
     public string displayName;
     [PreviewField] public Sprite icon;
     public bool nonDepleting;
+    public bool hidden;
 
     [Unity.Collections.ReadOnly, ScriptableObjectId, SerializeField] private string resourceId;
 

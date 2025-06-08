@@ -2,24 +2,22 @@ using System;
 using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public abstract class DuskwatchAgent : MonoBehaviour
 {
     private const float DestinationThreshold = 1.2f;
     
-    private static readonly int SpeedAnimationHash = Animator.StringToHash("Speed");
-    private static readonly int HarvestAnimationHash = Animator.StringToHash("Harvest");
+    protected static readonly int SpeedAnimationHash = Animator.StringToHash("Speed");
+    protected static readonly int AttackAnimationHash = Animator.StringToHash("Attack");
 
-    [SerializeField] private Animator _animator;
-    [SerializeField] private BackpackSwitcher _backpackSwitcher;
-    [SerializeField] private WeaponSwitcher _weaponSwitcher;
+    [SerializeField] protected Animator _animator;
     private IAstarAI _navAgent;
     
     private Queue<IAgentAction> _actionQueue = new Queue<IAgentAction>();
 
     private IAgentTask _currentTask;
     private IAgentAction _currentAction;
-    private HeldResource _heldResource;
     private float _lastVelocityUpdate;
 
     public Vector3 Position { get; private set; }
@@ -36,53 +34,9 @@ public abstract class DuskwatchAgent : MonoBehaviour
     public void Halt() => _navAgent.destination = _navAgent.position;
     public bool HasReachedDestination(float targetDistance) => Vector3.Distance(Position, Destination) < targetDistance + DestinationThreshold;
 
-    public bool HasResource => _heldResource.amount > 0;
-    public bool HoldingMaxAmount => _heldResource.amount >= _heldResource.resource.maxHeld;
-    public ResourceDefinition HeldResource => _heldResource.resource;
-
-    public bool Harvesting
-    {
-        get => _animator.GetBool(HarvestAnimationHash);
-        set => _animator.SetBool(HarvestAnimationHash, value);
-    }
-
-    public void HarvestResource(ResourceDefinition resourceDefinition)
-    {
-        if (_heldResource.resource != resourceDefinition)
-        {
-            _heldResource = new HeldResource()
-            {
-                resource = resourceDefinition,
-                amount = resourceDefinition.collectedPerHit
-            };
-        }
-        else
-        {
-            _heldResource.amount = Mathf.Clamp(_heldResource.amount + resourceDefinition.collectedPerHit, 0, resourceDefinition.maxHeld);
-        }
-
-        _backpackSwitcher.SetBackpack(resourceDefinition.backpackType);
-    }
-
     public void OnAnimationHit() // Called From Animation Behaviour
     {
         if(_currentAction != null) _currentAction.OnAgentHit();
-    }
-
-    public void ReturnResource()
-    {
-        if(_heldResource.amount == 0) return;
-        
-        SceneReferences.Instance.ResourceManager.AddResource(_heldResource.resource, _heldResource.amount);
-        UIReferences.Instance.FloatingNumberPanel.DisplayResourceGain(this, _heldResource.resource, _heldResource.amount, transform.position);
-        _heldResource.amount = 0;
-        
-        _backpackSwitcher.SetBackpack(BackpackType.None);
-    }
-
-    public void SetWeapon(WeaponType weaponType)
-    {
-        _weaponSwitcher.SetWeapon(weaponType);
     }
 
     public void QueueAction(IAgentAction action)
@@ -99,9 +53,10 @@ public abstract class DuskwatchAgent : MonoBehaviour
 
     private void Update()
     {
+        Profiler.BeginSample("Update Agent");
         Position = transform.position;
         _lastVelocityUpdate += Time.deltaTime;
-        if (RotationTarget != null)
+        if (RotationTarget)
         {
             transform.LookAt(RotationTarget);
         }
@@ -159,6 +114,7 @@ public abstract class DuskwatchAgent : MonoBehaviour
                 }
             }
         }
+        Profiler.EndSample();
     }
 
     private void StopCurrentTask()

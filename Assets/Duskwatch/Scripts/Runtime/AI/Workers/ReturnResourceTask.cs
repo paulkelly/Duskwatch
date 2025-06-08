@@ -12,14 +12,17 @@ public class ReturnResourceTask : MonoBehaviour, IAgentTask
         SceneReferences.Instance.WorkerTaskManager.RegisterTask(this);
     }
 
-    public bool CanPerformTask(DuskwatchAgent worker)
+    public bool CanPerformTask(DuskwatchAgent agent)
     {
+        WorkerAgent worker = agent as WorkerAgent;
+        if(!worker) return false;
         if (!worker.HasResource) return false;
         if(_returnResourceComponent.AllowAny) return true;
         return worker.HeldResource == _returnResourceComponent.AllowedResource;
     }
-    public float GetPriority(DuskwatchAgent worker)
+    public float GetPriority(DuskwatchAgent agent)
     {
+        WorkerAgent worker = agent as WorkerAgent;
         if (worker.HasResource)
         {
             if (!worker.HoldingMaxAmount)
@@ -37,13 +40,15 @@ public class ReturnResourceTask : MonoBehaviour, IAgentTask
 
     public void StartTask(DuskwatchAgent agent)
     {
-        SceneReferences.Instance.WorkerTaskManager.AddWorkerCollectingResource(agent.HeldResource, agent);
-        agent.QueueAction(new MoveAgentAction(agent, () => _returnResourceComponent.Collider.ClosestPoint(agent.Position)));
-        agent.QueueAction(new ReturnResourceAction(agent));
+        WorkerAgent worker = agent as WorkerAgent;
+        SceneReferences.Instance.WorkerTaskManager.AddWorkerCollectingResource(worker.HeldResource, agent);
+        agent.QueueAction(new MoveAgentAction(worker, () => _returnResourceComponent.Collider.ClosestPoint(worker.Position)));
+        agent.QueueAction(new ReturnResourceAction(worker));
     }
 
     public void StopTask(DuskwatchAgent agent)
     {
-        SceneReferences.Instance.WorkerTaskManager.RemoveWorkerCollectingResource(agent.HeldResource, agent);
+        WorkerAgent worker = agent as WorkerAgent;
+        SceneReferences.Instance.WorkerTaskManager.RemoveWorkerCollectingResource(worker.HeldResource, agent);
     }
 }

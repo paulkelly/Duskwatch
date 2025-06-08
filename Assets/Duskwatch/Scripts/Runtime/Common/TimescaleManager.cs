@@ -2,8 +2,9 @@ using System;
 using PrimeTween;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimescaleManager : MonoBehaviour
 {
+    private Tween _currentTween;
     private void OnEnable()
     {
         DuskwatchInput.OnInputModeChanged += DuskwatchInputOnOnInputModeChanged;
@@ -17,13 +18,15 @@ public class TimeManager : MonoBehaviour
 
     private void DuskwatchInputOnOnInputModeChanged(InputMode mode)
     {
-        if (mode == InputMode.SelectionWheel)
+        _currentTween.Stop();
+        
+        if (mode is InputMode.SelectionWheel or InputMode.Build)
         {
-            Tween.GlobalTimeScale(0.1f, 0.3f);
+            _currentTween = Tween.GlobalTimeScale(0.1f, 0.3f);
         }
         else
         {
-            Tween.GlobalTimeScale(1f, 0.3f);
+            _currentTween = Tween.GlobalTimeScale(1f, 0.3f);
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IHitReaction
 {
     public void OnHit(DamageType damageType, int damageDealt, Vector3 position);
+    public bool PlayerOnly { get; }
 }
 
 public interface IDestroyReaction

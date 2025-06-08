@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -4670669044055575168}
   - component: {fileID: 7318930508752662187}
   - component: {fileID: 2141433128709896290}
+  - component: {fileID: -5027293421253846942}
   m_Layer: 8
   m_Name: DW_Tree_Pine_01
   m_TagString: Untagged
@@ -101,8 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6887ca9bea2a3464594496f67985a96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth:
+    _value: 80
   _immuneToDamage: 0
-  _maxHealth: 80
   _hitReactions:
   - {fileID: 3098172978743417829}
   - {fileID: 7318930508752662187}
@@ -111,6 +113,7 @@ MonoBehaviour:
   _destroyReactions:
   - {fileID: -4670669044055575168}
   - {fileID: 2141433128709896290}
+  - {fileID: -5027293421253846942}
   - {fileID: 8430736733164932913}
   - {fileID: 2408861149914442583}
   - {fileID: 732211995093014900}
@@ -192,6 +195,20 @@ MonoBehaviour:
   _collider: {fileID: 7081961726264237302}
   _resourceHealth: {fileID: 3785479267770341633}
   _resource: {fileID: 11400000, guid: e3092c30b8f6cfc43889f78e32eb49f1, type: 2}
+--- !u!114 &-5027293421253846942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396279643126419632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b687389aed6b0134f970e2804b66d07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 3785479267770341633}
+  _delay: 60
 --- !u!1 &6309785374159743413
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ReturnResourceAction : IAgentAction
 {
-    private DuskwatchAgent _worker;
+    private WorkerAgent _worker;
 
-    public ReturnResourceAction(DuskwatchAgent worker)
+    public ReturnResourceAction(WorkerAgent worker)
     {
         _worker = worker;
     }

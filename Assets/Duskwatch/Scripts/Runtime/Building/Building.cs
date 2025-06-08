@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Building : AbstractDestroyReaction
 {
     [SerializeField] private BuildingSettings _settings;
     [SerializeField] private Collider _collider;
@@ -41,7 +41,7 @@ public class Building : MonoBehaviour
             }
         }
     }
-    
+
     protected void OnEnable()
     {
         _buildingActiveListeners = GetComponents<IBuildingActiveFunctions>();
@@ -123,5 +123,15 @@ public class Building : MonoBehaviour
         // }
 
         return true;
+    }
+
+    public override void OnDestroyed()
+    {
+        SetBuildingActive(false);
+    }
+
+    public override void OnResurrect()
+    {
+        SetBuildingActive(true);
     }
 }

@@ -61,14 +61,14 @@ public class CursorInputHandler : MonoBehaviour
 
                 if (_dampingCursor)
                 {
-                    _dampTime += Time.deltaTime;
+                    _dampTime += Time.unscaledDeltaTime;
                     float dampValue = _dampTime / ControllerCursorDampingDuration;
                     if (dampValue >= 1) _dampingCursor = false;
 
                     controllerInput *= Mathf.Lerp(0.3f, 1f, Mathf.Clamp01(dampValue));
                 }
                 
-                MouseScreenPosition += controllerInput * (ControllerCursorSpeed * Time.deltaTime);
+                MouseScreenPosition += controllerInput * (ControllerCursorSpeed * Time.unscaledDeltaTime);
                 MouseScreenPosition = new Vector2(Mathf.Clamp(MouseScreenPosition.x, 0, Screen.width), Mathf.Clamp(MouseScreenPosition.y, 0, Screen.height));
             }
             

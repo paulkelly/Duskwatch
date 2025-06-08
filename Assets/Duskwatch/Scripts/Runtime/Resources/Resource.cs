@@ -10,6 +10,8 @@ public class Resource
     public BindableInt inUse;
     public bool nonDepleting;
 
+    public bool hidden;
+
     public Resource(ResourceDefinition definition)
     {
         name = new BindableString(definition.displayName);
@@ -17,5 +19,6 @@ public class Resource
         amount = new BindableInt(0);
         inUse = new BindableInt(0);
         nonDepleting = definition.nonDepleting;
+        hidden = definition.hidden;
     }
 }

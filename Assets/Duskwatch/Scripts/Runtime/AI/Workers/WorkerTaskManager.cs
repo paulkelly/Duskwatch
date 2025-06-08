@@ -6,7 +6,6 @@ using UnityEngine.Profiling;
 public class WorkerTaskManager : MonoBehaviour
 {
     public HashSet<IAgentTask> _availableTasks = new HashSet<IAgentTask>();
-
     public Dictionary<ResourceDefinition, HashSet<DuskwatchAgent>> _workersCollectingResource = new Dictionary<ResourceDefinition, HashSet<DuskwatchAgent>>();
 
     public IAgentTask GetTask(WorkerAgent agent)

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class InteractableAction : IAgentAction
 {
-    private DuskwatchAgent _worker;
+    private WorkerAgent _worker;
     private InteractableObj _interactWith;
     
-    public InteractableAction(DuskwatchAgent worker, InteractableObj interactWith)
+    public InteractableAction(WorkerAgent worker, InteractableObj interactWith)
     {
         _worker = worker;
         _interactWith = interactWith;

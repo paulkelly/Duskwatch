@@ -10,6 +10,8 @@ public class BuildingManager : MonoBehaviour
     public event CollectionBuildingRemoved OnCollectionBuildingRemoved;
     
     private HashSet<ReturnResourceComponent> _resourceCollectionBuildings = new HashSet<ReturnResourceComponent>();
+    
+    public TownHallComponent townHall { get; private set; }
 
     public ReturnResourceComponent GetClosestReturnBuilding(Vector3 position, ResourceDefinition resource)
     {
@@ -45,6 +47,12 @@ public class BuildingManager : MonoBehaviour
 
         return false;
     }
+
+    public void SetTownHall(TownHallComponent townHall)
+    {
+        this.townHall = townHall;
+    }
+    
 
     public void RegisterResourceCollector(ReturnResourceComponent collectionBuilding)
     {

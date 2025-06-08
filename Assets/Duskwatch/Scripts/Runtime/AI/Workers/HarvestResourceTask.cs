@@ -33,7 +33,9 @@ public class HarvestResourceTask : AbstractDestroyReaction, IAgentTask
 
     public bool CanPerformTask(DuskwatchAgent agent)
     {
-        if (agent.HasResource && agent.HeldResource != _resource) return false;
+        WorkerAgent worker = agent as WorkerAgent;
+        if(!worker) return false;
+        if (worker.HasResource && worker.HeldResource != _resource) return false;
         return _currentWorkers.Count < _resource.maxWorkersPerResource;
     }
 
@@ -64,8 +66,9 @@ public class HarvestResourceTask : AbstractDestroyReaction, IAgentTask
         return Vector3.Distance(Position, agentPosition);
     }
 
-    public void StartTask(DuskwatchAgent worker)
+    public void StartTask(DuskwatchAgent agent)
     {
+        WorkerAgent worker = agent as WorkerAgent;
         SceneReferences.Instance.WorkerTaskManager.AddWorkerCollectingResource(_resource, worker);
         _currentWorkers.Add(worker);
         worker.QueueAction(new MoveAgentAction(worker, () => _collider.ClosestPoint(worker.Position)));

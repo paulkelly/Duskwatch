@@ -47,8 +47,9 @@ public class InteractableTask : MonoBehaviour, IAgentTask
         return Vector3.Distance(interactWith.Position, agentPosition);
     }
 
-    public void StartTask(DuskwatchAgent worker)
+    public void StartTask(DuskwatchAgent agent)
     {
+        WorkerAgent worker = agent as WorkerAgent;
         _currentWorkers.Add(worker);
         worker.QueueAction(new MoveAgentAction(worker, () => interactWith.GetClosestPosition(worker.Position)));
         worker.QueueAction(new InteractableAction(worker, interactWith));
