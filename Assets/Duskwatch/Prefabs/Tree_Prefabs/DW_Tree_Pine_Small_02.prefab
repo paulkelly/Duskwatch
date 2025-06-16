@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4766163947548676344}
   - component: {fileID: -7239181937558690209}
   - component: {fileID: 5202390999258495276}
+  - component: {fileID: -8013230367115668980}
   m_Layer: 8
   m_Name: DW_Tree_Pine_Small_02
   m_TagString: Untagged
@@ -105,18 +106,6 @@ MonoBehaviour:
   maxHealth:
     _value: 60
   _immuneToDamage: 0
-  _hitReactions:
-  - {fileID: -8659139571644411129}
-  - {fileID: -4766163947548676344}
-  - {fileID: 8370283436046891990}
-  - {fileID: 4761228219158010375}
-  _destroyReactions:
-  - {fileID: 9046796055528182590}
-  - {fileID: -7239181937558690209}
-  - {fileID: 5202390999258495276}
-  - {fileID: 8120819580416611893}
-  - {fileID: 9101145419715517438}
-  - {fileID: 857671617930650940}
 --- !u!114 &-8659139571644411129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +198,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 3663705987035279695}
   _delay: 60
+--- !u!114 &-8013230367115668980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038776585178241811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c83926a7e7edb04fafe06efc3059c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerOnly: 0
+  _sfx: {fileID: 11400000, guid: e77ba7586ff79cc4a9f6ee504cdbffce, type: 2}
+  nonPlayerVolume: 0.3
 --- !u!1 &4463233592189576679
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,17 +580,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3866583610912473272, guid: 147a965865fb10f43aa4c2fe5b11e987, type: 3}
   m_PrefabInstance: {fileID: 2125077748626780712}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8370283436046891990 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7589958023789234686, guid: 147a965865fb10f43aa4c2fe5b11e987, type: 3}
-  m_PrefabInstance: {fileID: 2125077748626780712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbbb60a18fbf06438c9e0300f26243d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &9140175567311160635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -648,17 +641,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42599a1e39d2b4e4ca6dcb4bab5d87a0, type: 3}
---- !u!114 &4761228219158010375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4380641889153703740, guid: 42599a1e39d2b4e4ca6dcb4bab5d87a0, type: 3}
-  m_PrefabInstance: {fileID: 9140175567311160635}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbbb60a18fbf06438c9e0300f26243d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5860976069596503561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3426733467177851698, guid: 42599a1e39d2b4e4ca6dcb4bab5d87a0, type: 3}

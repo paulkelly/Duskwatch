@@ -19,6 +19,8 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private SoundData dayTransitionSound;
     [SerializeField] private SoundData nightTransitionSound;
     
+    [SerializeField, SerializeReference] private List<IDayNightChange> _dayNightChangeReactions;
+    
     [Range(0,1)] public float timeOfDay;
 
     public bool isDay => _isDay;
@@ -42,6 +44,11 @@ public class DayNightCycle : MonoBehaviour
         Tween.LightIntensity(moonLight, MoonIntensityDay, transitionTimeOut);
         
         dayTransitionSound.Play();
+        
+        foreach (var dayNightChangeReaction in _dayNightChangeReactions)
+        {
+            dayNightChangeReaction.OnDay();
+        }
     }
     
     public void SetToNighttime()
@@ -55,6 +62,11 @@ public class DayNightCycle : MonoBehaviour
         Tween.Delay(transitionTime).OnComplete(FinishTransition);
         
         nightTransitionSound.Play();
+        
+        foreach (var dayNightChangeReaction in _dayNightChangeReactions)
+        {
+            dayNightChangeReaction.OnNight();
+        }
     }
 
     private void FinishTransition()
@@ -69,6 +81,11 @@ public class DayNightCycle : MonoBehaviour
 
         _isDay = true;
         moonLight.intensity = MoonIntensityDay;
+        
+        foreach (var dayNightChangeReaction in _dayNightChangeReactions)
+        {
+            dayNightChangeReaction.OnDay();
+        }
     }
     
     private void Update()

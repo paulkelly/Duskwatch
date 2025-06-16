@@ -10,7 +10,6 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private Vector2Int _damageRange;
     [SerializeField] private ParticleSystem _effect;
     [SerializeField] private SoundData _missSFX;
-    [SerializeField] private SoundData _hitSFX;
 
     [SerializeField] private float _angle;
     [SerializeField] private float _range;
@@ -65,14 +64,7 @@ public class CharacterAttack : MonoBehaviour
             healthComponent.Damage(_damageType, damage, true, otherPos);
         }
 
-        if (hit)
-        {
-            _hitSFX.Play();
-        }
-        else
-        {
-            _missSFX.Play();
-        }
+        _missSFX.Play();
     }
 
     private void Update()

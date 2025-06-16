@@ -7723,7 +7723,6 @@ MonoBehaviour:
   _damageRange: {x: 5, y: 8}
   _effect: {fileID: 2602879025190323572}
   _missSFX: {fileID: 11400000, guid: 1a7804508e7a925439dd7927b7887f2d, type: 2}
-  _hitSFX: {fileID: 11400000, guid: bc782782e61fca84a97b4b55c29e8011, type: 2}
   _angle: 220
   _range: 2.5
   _cooldown: 0.3
@@ -13951,6 +13950,10 @@ PrefabInstance:
       value: FX_Shoot_Axe_muzzle
       objectReference: {fileID: 0}
     - target: {fileID: 964872830951245914, guid: 51bd136e367531b4d90dec47834987cc, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964872830951245914, guid: 51bd136e367531b4d90dec47834987cc, type: 3}
       propertyPath: InitialModule.rotation3D
       value: 1
       objectReference: {fileID: 0}
@@ -14008,6 +14011,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964872830951245915, guid: 51bd136e367531b4d90dec47834987cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964872831424641561, guid: 51bd136e367531b4d90dec47834987cc, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

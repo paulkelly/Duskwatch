@@ -7,6 +7,8 @@ namespace AudioSystem
         readonly SoundManager soundManager;
         Vector3 position = Vector3.zero;
         bool randomPitch;
+        bool setVolume;
+        float volume = 1f;
 
         public SoundBuilder(SoundManager soundManager)
         {
@@ -22,6 +24,13 @@ namespace AudioSystem
         public SoundBuilder WithRandomPitch()
         {
             this.randomPitch = true;
+            return this;
+        }
+        
+        public SoundBuilder WithVolume(float volume)
+        {
+            this.setVolume = true;
+            this.volume = volume;
             return this;
         }
 
@@ -48,6 +57,11 @@ namespace AudioSystem
             if (randomPitch)
             {
                 soundEmitter.WithRandomPitch();
+            }
+
+            if (setVolume)
+            {
+                soundEmitter.SetVolume(volume);
             }
 
             if (soundData.frequentSound)

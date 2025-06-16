@@ -43,6 +43,7 @@ namespace AudioSystem
         public bool ignoreListenerPause;
         
         public AudioRolloffMode rolloffMode = AudioRolloffMode.Logarithmic;
+        public AnimationCurve customRolloff = new AnimationCurve();
         
         public void Play()
         {
@@ -52,6 +53,11 @@ namespace AudioSystem
         public void Play(Vector3 position)
         {
             SoundManager.Instance.CreateSoundBuilder().WithPosition(position).WithRandomPitch().Play(this);
+        }
+        
+        public void Play(Vector3 position, float volume)
+        {
+            SoundManager.Instance.CreateSoundBuilder().WithPosition(position).WithRandomPitch().WithVolume(volume).Play(this);
         }
 
         public SoundEmitter PlayLooping()

@@ -41,13 +41,18 @@ namespace AudioSystem
             audioSource.dopplerLevel = data.dopplerLevel;
             audioSource.spread = data.spread;
 
-            audioSource.minDistance = data.minDistance;
-            audioSource.maxDistance = data.maxDistance;
-
             audioSource.ignoreListenerVolume = data.ignoreListenerVolume;
             audioSource.ignoreListenerPause = data.ignoreListenerPause;
 
             audioSource.rolloffMode = data.rolloffMode;
+            
+            audioSource.minDistance = data.minDistance;
+            audioSource.maxDistance = data.maxDistance;
+
+            if (data.rolloffMode == AudioRolloffMode.Custom)
+            {
+                audioSource.SetCustomCurve(AudioSourceCurveType.CustomRolloff, data.customRolloff);
+            }
         }
 
         public void Play()
@@ -82,6 +87,11 @@ namespace AudioSystem
         public void WithRandomPitch(float min = -0.03f, float max = 0.03f)
         {
             audioSource.pitch += Random.Range(min, max);
+        }
+        
+        public void SetVolume(float volume)
+        {
+            audioSource.volume = volume;
         }
     }
 }

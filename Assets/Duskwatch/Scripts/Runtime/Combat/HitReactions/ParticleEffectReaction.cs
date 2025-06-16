@@ -4,7 +4,7 @@ public class ParticleEffectReaction : AbstractHitReaction
 {
     [SerializeField] private ParticleSystem _effect;
     [SerializeField] private bool _atHitPosition;
-    public override void OnHit(DamageType damageType, int damageDealt, Vector3 position)
+    public override void OnHit(DamageType damageType, int damageDealt, Vector3 position, bool wasPlayer)
     {
         if (_atHitPosition)
         {

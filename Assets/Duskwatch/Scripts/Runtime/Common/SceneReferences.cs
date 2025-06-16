@@ -15,6 +15,7 @@ public class SceneReferences : MonoBehaviour
 
     public WorkerTaskManager WorkerTaskManager;
     public HarvestTaskManager HarvestTaskManager;
+    public WaveManager WaveManager;
 
     private void Awake()
     {

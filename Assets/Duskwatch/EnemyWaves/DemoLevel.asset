@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b251d8aae61e3b64b969a7cbf855fe9d, type: 3}
+  m_Name: DemoLevel
+  m_EditorClassIdentifier: 
+  waveDefinitions:
+  - enemySpawns:
+    - loc: 0
+      enemies:
+        enemyPrefab: {fileID: 8761329328220869331, guid: db18c40ed1dd4d44598e3973b9e43aa3, type: 3}
+        count: 5
+  - enemySpawns:
+    - loc: 0
+      enemies:
+        enemyPrefab: {fileID: 8761329328220869331, guid: db18c40ed1dd4d44598e3973b9e43aa3, type: 3}
+        count: 15

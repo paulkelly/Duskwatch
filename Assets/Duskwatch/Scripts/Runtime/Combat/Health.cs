@@ -45,7 +45,7 @@ public class Health : MonoBehaviour
         foreach (var hitReaction in _hitReactions)
         {
             if (hitReaction.PlayerOnly && !isPlayer) continue;
-            hitReaction.OnHit(damageType, damage, position);
+            hitReaction.OnHit(damageType, damage, position, isPlayer);
         }
 
         if (currentHealth <= 0 && !_immuneToDamage)
@@ -71,6 +71,26 @@ public class Health : MonoBehaviour
         int oldValue = currentHealth;
         currentHealth.SetValue(Mathf.Clamp(newValue, 0, maxHealth));
         return oldValue - currentHealth;
+    }
+
+    public void AddReaction(IHitReaction reaction)
+    {
+        _hitReactions.Add(reaction);
+    }
+
+    public void RemoveReaction(IHitReaction reaction)
+    {
+        _hitReactions.Add(reaction);
+    }
+
+    public void AddReaction(IDestroyReaction reaction)
+    {
+        _destroyReactions.Add(reaction);
+    }
+    
+    public void RemoveReaction(IDestroyReaction reaction)
+    {
+        _destroyReactions.Add(reaction);
     }
 
     private void OnEnable()

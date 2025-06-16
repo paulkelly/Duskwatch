@@ -10,7 +10,7 @@ public class GatherResourceHitReaction : AbstractHitReaction
 
     private float _carried;
     
-    public override void OnHit(DamageType damageType, int damageDealt, Vector3 position)
+    public override void OnHit(DamageType damageType, int damageDealt, Vector3 position, bool wasPlayer)
     {
         float multipliedDamage = (damageDealt * _multiplier) + _carried;
         int resourceGain = _basedOnDamage ? Mathf.FloorToInt(multipliedDamage) : _gainedPerHit;
